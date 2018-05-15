@@ -32,6 +32,7 @@ namespace supportDesk
             if (txtSolicitud.Text != string.Empty)
             {
                 long str = Convert.ToInt64(txtSolicitud.Text);
+                cleanGridView();
                 cargarSolicitud(str);
 
 
