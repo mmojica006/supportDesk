@@ -73,12 +73,17 @@ namespace supportDesk
 
                 modelLogEstado.Guardar(dataAlumno);
 
+                int Resultado = modelSolicitud.Guardar(this.idSolicitud, int.Parse(txtState.Text)); 
 
+                if (Resultado == 1)
+                {
+                    MessageBox.Show("SOLICITUD ACTUALIZADA!", "CAMBIO DE ESTADO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    form.cleanGridView();
+                    form.cargarSolicitud(this.idSolicitud);
+                    this.Close();
+                }
 
-
-                form.cleanGridView();
-                form.cargarSolicitud(this.idSolicitud);
-                this.Close();
+            
 
                 
             }

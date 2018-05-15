@@ -463,22 +463,24 @@ namespace supportDesk.Model
             return dataSolicitud;
         }
 
-        public void Guardar (SL_SolicitudCredito dataSolicitud)
+        public int  Guardar (long solicitud, int Estado)
         {
-            var solicitudCredito = new SL_SolicitudCredito();
+            int result = 0;
             try
             {
                 using (var ctx = new ceContext())
                 {
 
-                if (dataSolicitud.C5000 > 0)
+                if (Estado > 0)
                     {
-                
-                    }else
-                    {
+                        var query = (from q in ctx.SL_SolicitudCredito where q.C5000 == solicitud
+                                     select q).First();
+
+                        query.C5063 = Estado;
+                         result = ctx.SaveChanges();
 
                     }
-
+                    return result;
                 }
 
             }catch(Exception)
