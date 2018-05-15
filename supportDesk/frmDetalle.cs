@@ -72,6 +72,10 @@ namespace supportDesk
                 };
 
                 modelLogEstado.Guardar(dataAlumno);
+
+
+
+
                 form.cleanGridView();
                 form.cargarSolicitud(this.idSolicitud);
                 this.Close();

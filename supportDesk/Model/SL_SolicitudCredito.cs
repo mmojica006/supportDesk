@@ -463,6 +463,34 @@ namespace supportDesk.Model
             return dataSolicitud;
         }
 
+        public void Guardar (SL_SolicitudCredito dataSolicitud)
+        {
+            var solicitudCredito = new SL_SolicitudCredito();
+            try
+            {
+                using (var ctx = new ceContext())
+                {
+
+                if (dataSolicitud.C5000 > 0)
+                    {
+                 
+                    }else
+                    {
+
+                    }
+
+                }
+
+            }catch(Exception)
+            {
+                throw;
+            }
+
+      
+
+
+        }
+
 
     }
 }

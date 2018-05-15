@@ -84,7 +84,7 @@ namespace supportDesk
 
         private void dgvSolicitudes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-
+       
         }
 
         public void cleanGridView()
@@ -101,6 +101,13 @@ namespace supportDesk
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void dgvSolicitudes_CellDoubleClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1) return;
+            new frmDetalle( Convert.ToInt64( dgvSolicitudes.Rows[e.RowIndex].Cells[0].Value), this).ShowDialog();
 
         }
     }

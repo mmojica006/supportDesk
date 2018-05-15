@@ -85,6 +85,7 @@
             this.dgvSolicitudes.RowTemplate.Height = 28;
             this.dgvSolicitudes.Size = new System.Drawing.Size(967, 268);
             this.dgvSolicitudes.TabIndex = 9;
+            this.dgvSolicitudes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSolicitudes_CellDoubleClick_1);
             // 
             // Solicitud
             // 
