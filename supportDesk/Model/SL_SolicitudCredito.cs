@@ -4,7 +4,10 @@ namespace supportDesk.Model
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Core.Objects;
     using System.Data.Entity.Spatial;
+    using System.Data.Entity.Validation;
+    using System.Data.SqlClient;
     using System.Linq;
 
     public partial class SL_SolicitudCredito
@@ -463,35 +466,73 @@ namespace supportDesk.Model
             return dataSolicitud;
         }
 
-        public int  Guardar (long solicitud, int Estado)
+        public bool  Guardar (decimal solicitud, decimal Estado)
         {
-            int result = 0;
+
+            var dataSolicitud = new SL_SolicitudCredito() { C5000 = solicitud,C5063= Estado };
+            var datSo = new SL_SolicitudCredito();
+           
             try
             {
                 using (var ctx = new ceContext())
                 {
 
-                if (Estado > 0)
+                if (solicitud > 0)
                     {
-                        var query = (from q in ctx.SL_SolicitudCredito where q.C5000 == solicitud
-                                     select q).First();
+                        //var query = (from q in ctx.SL_SolicitudCredito where q.C5000 == solicitud
+                        //             select q).First();
 
-                        query.C5063 = Estado;
-                         result = ctx.SaveChanges();
+                        //query.C5063 = Estado;
+
+
+                        //ctx.SL_SolicitudCredito.Attach(dataSolicitud);
+                        //ctx.Entry(dataSolicitud).Property(x => x.C5063).IsModified = true;
+                        //ctx.SaveChanges();
+
+                        var sol = ctx.SL_SolicitudCredito.First(x=>x.C5000== solicitud);
+                        sol.C5063 = Estado;
+                        ctx.SaveChanges();
+
+
+
+
 
                     }
-                    return result;
+                    return true;
+
                 }
 
-            }catch(Exception)
+            }       
+
+            catch (Exception)
+            {           
+               
+                return false;
+            }
+  
+
+        }
+
+        public int validateEstado(decimal idSolicitud)
+        {
+            try
+            {
+                using (var ctx = new ceContext())
+                {
+                    ObjectParameter outputValida = new ObjectParameter("@valida",typeof(int));
+
+                   
+                     var result = ctx.Database.SqlQuery<SL_SolicitudCredito>("nic.USPE_SUPPORT_VALIDAESTADO")
+                }
+
+            }
+            catch (Exception)
             {
                 throw;
             }
-
-      
-
-
         }
+
+
 
 
     }

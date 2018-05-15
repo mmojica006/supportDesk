@@ -60,28 +60,33 @@ namespace supportDesk
                 (txtComment.Text != string.Empty)
                 )
             {
-                var dataAlumno = new tbl_logEstado
+                
+
+               if ( modelSolicitud.Guardar(this.idSolicitud, int.Parse(txtState.Text)))
                 {
-                    solicitud = this.idSolicitud,
-                    Objeto = "SL_SolicitudCredito",
-                    MotivoCambio = txtComment.Text,
-                    Parametro = "INSERT",
-                    EstadoAnterior =Convert.ToInt16(this.estadoAnterior),
-                    NuevoEstado = int.Parse(txtState.Text),
-                    Usuario = "MMOJICA"
-                };
+                    var dataAlumno = new tbl_logEstado
+                    {
+                        solicitud = this.idSolicitud,
+                        Objeto = "SL_SolicitudCredito",
+                        MotivoCambio = txtComment.Text,
+                        Parametro = "INSERT",
+                        EstadoAnterior = Convert.ToInt16(this.estadoAnterior),
+                        NuevoEstado = int.Parse(txtState.Text),
+                        Usuario = "MMOJICA"
+                    };
 
-                modelLogEstado.Guardar(dataAlumno);
+                    modelLogEstado.Guardar(dataAlumno);
 
-                int Resultado = modelSolicitud.Guardar(this.idSolicitud, int.Parse(txtState.Text)); 
-
-                if (Resultado == 1)
-                {
                     MessageBox.Show("SOLICITUD ACTUALIZADA!", "CAMBIO DE ESTADO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     form.cleanGridView();
                     form.cargarSolicitud(this.idSolicitud);
                     this.Close();
+                }else
+                {
+                    MessageBox.Show("ERROR EN LA ACTUALIZACION!", "CAMBIO DE ESTADO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+
+             
 
             
 
