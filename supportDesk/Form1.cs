@@ -25,6 +25,49 @@ namespace supportDesk
          
             dgvSolicitudes.AutoGenerateColumns = false;
 
+            // callProcedure();
+            //callProc(2000057);
+            callProcedure2(2000057); 
+
+        }
+
+        private void callProcedure2(int v)
+        {
+
+            int result = modelSolicitud.validaProcedure(v);
+           
+        }
+
+        private void callProc(decimal v)
+        {
+            var a =  modelSolicitud.listadoSol(v);
+            Console.WriteLine(
+               string.Format(
+                      "Solicitud {0}, estado {1}, cliente {2}",
+                      a.idsolicitud,
+                      a.estado,
+                      a.nombre
+                   )
+               );
+        }
+
+        private void callProcedure()
+        {
+          foreach(var a in modelSolicitud.listadoSol())
+            {
+
+         
+            Console.WriteLine(
+                string.Format(
+                       "Solicitud {0}, estado {1}, cliente {2}" ,
+                       a.idsolicitud,
+                       a.estado,
+                       a.nombre
+                    )
+                );
+
+            }
+
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)

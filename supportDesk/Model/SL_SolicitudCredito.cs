@@ -1,9 +1,11 @@
 namespace supportDesk.Model
 {
+    using Procedure;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data;
     using System.Data.Entity.Core.Objects;
     using System.Data.Entity.Spatial;
     using System.Data.Entity.Validation;
@@ -513,16 +515,114 @@ namespace supportDesk.Model
 
         }
 
-        public int validateEstado(decimal idSolicitud)
+        //public int validateEstado(decimal idSolicitud)
+        //{
+        //    try
+        //    {
+        //        using (var ctx = new ceContext())
+        //        {
+        //            ObjectParameter outputValida = new ObjectParameter("@valida",typeof(int));
+
+                   
+        //             var result = ctx.Database.SqlQuery<SL_SolicitudCredito>("nic.USPE_SUPPORT_VALIDAESTADO")
+        //        }
+
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
+
+        public List<usp_solicitud>  listadoSol()
         {
             try
             {
+
+                using (var ctx =  new ceContext())
+                {
+                    return ctx.Database.SqlQuery<usp_solicitud>("usp_solicitud").ToList();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+
+        }
+        public usp_solicitud listadoSol(decimal idSolicitud)
+        {
+            try
+            {
+
                 using (var ctx = new ceContext())
                 {
-                    ObjectParameter outputValida = new ObjectParameter("@valida",typeof(int));
+                    return ctx.Database.SqlQuery<usp_solicitud>("usp_solicitud @p0", idSolicitud).SingleOrDefault();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
-                   
-                     var result = ctx.Database.SqlQuery<SL_SolicitudCredito>("nic.USPE_SUPPORT_VALIDAESTADO")
+
+        }
+
+        public int validaProcedure(decimal idsol)
+        {
+            int result=0;
+            try
+            {
+                var param1 = new SqlParameter
+                {
+                    ParameterName = "@idsolicitud",
+                    SqlDbType = System.Data.SqlDbType.Decimal,
+                    Direction = System.Data.ParameterDirection.Input
+                };
+
+                var param2 = new SqlParameter
+                {
+                    ParameterName = "@valida",
+                    SqlDbType = System.Data.SqlDbType.Int,
+                    Direction = System.Data.ParameterDirection.Output
+                };
+
+                var procResult = new SqlParameter
+                {
+                    ParameterName = "@procResult",
+                    SqlDbType = SqlDbType.Int,
+                    Direction = ParameterDirection.Output
+                };
+
+
+                using (var ctx = new ceContext())
+                {
+                    result = ctx.Database.ExecuteSqlCommand("exec @procResult =  usp_valida @idsolicitud, @valida OUTPUT"  ,
+                        new object[]
+                        {
+                            new SqlParameter
+                            {
+                                ParameterName = "@idsolicitud",
+                                Value =idsol,
+                                SqlDbType = SqlDbType.Decimal,
+                                Direction= ParameterDirection.Input
+                            },
+                            param2,
+                            procResult
+
+                        }
+
+                        );
+
+                    int response = (int)param2.Value;
+                    int resp = (int)procResult.Value;
+
+
+
+
+                  
+
                 }
 
             }
@@ -530,7 +630,12 @@ namespace supportDesk.Model
             {
                 throw;
             }
+
+            return result;
         }
+
+
+
 
 
 

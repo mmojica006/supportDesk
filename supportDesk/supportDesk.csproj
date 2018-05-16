@@ -70,6 +70,7 @@
       <DependentUpon>frmDetalle.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\ceContext.cs" />
+    <Compile Include="Model\Procedure\usp_solicitud.cs" />
     <Compile Include="Model\SL_SolicitudCredito.cs" />
     <Compile Include="Model\tbl_logEstado.cs" />
     <Compile Include="Program.cs" />
@@ -103,9 +104,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model2\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

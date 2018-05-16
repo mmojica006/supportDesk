@@ -41,58 +41,65 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 38);
+            this.label1.Location = new System.Drawing.Point(8, 25);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 20);
+            this.label1.Size = new System.Drawing.Size(47, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Solicitud";
             // 
             // txtSol
             // 
-            this.txtSol.Location = new System.Drawing.Point(109, 38);
+            this.txtSol.Location = new System.Drawing.Point(73, 25);
+            this.txtSol.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtSol.Name = "txtSol";
             this.txtSol.ReadOnly = true;
-            this.txtSol.Size = new System.Drawing.Size(275, 26);
+            this.txtSol.Size = new System.Drawing.Size(185, 20);
             this.txtSol.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 92);
+            this.label2.Location = new System.Drawing.Point(8, 60);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 20);
+            this.label2.Size = new System.Drawing.Size(40, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Estado";
             // 
             // txtState
             // 
-            this.txtState.Location = new System.Drawing.Point(109, 89);
+            this.txtState.Location = new System.Drawing.Point(73, 58);
+            this.txtState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtState.Name = "txtState";
-            this.txtState.Size = new System.Drawing.Size(275, 26);
+            this.txtState.Size = new System.Drawing.Size(185, 20);
             this.txtState.TabIndex = 3;
             // 
             // txtComment
             // 
-            this.txtComment.Location = new System.Drawing.Point(109, 138);
+            this.txtComment.Location = new System.Drawing.Point(73, 90);
+            this.txtComment.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtComment.Multiline = true;
             this.txtComment.Name = "txtComment";
-            this.txtComment.Size = new System.Drawing.Size(275, 170);
+            this.txtComment.Size = new System.Drawing.Size(185, 112);
             this.txtComment.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 144);
+            this.label3.Location = new System.Drawing.Point(8, 94);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(91, 20);
+            this.label3.Size = new System.Drawing.Size(60, 13);
             this.label3.TabIndex = 4;
             this.label3.Text = "Comentario";
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(78, 371);
+            this.btnSave.Location = new System.Drawing.Point(52, 241);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(93, 39);
+            this.btnSave.Size = new System.Drawing.Size(62, 25);
             this.btnSave.TabIndex = 6;
             this.btnSave.Text = "Modificar";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -101,18 +108,20 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(177, 371);
+            this.btnCancel.Location = new System.Drawing.Point(118, 241);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(87, 39);
+            this.btnCancel.Size = new System.Drawing.Size(58, 25);
             this.btnCancel.TabIndex = 7;
             this.btnCancel.Text = "Cancelar";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // frmDetalle
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(403, 422);
+            this.ClientSize = new System.Drawing.Size(269, 274);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtComment);
@@ -121,6 +130,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtSol);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "frmDetalle";
             this.Text = "Detalle de la Solicitud";
             this.Load += new System.EventHandler(this.frmDetalle_Load);
