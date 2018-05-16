@@ -69,9 +69,13 @@ namespace supportDesk
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            if ((rbtnObservada.Checked==true)|| (rbtnAnulada.Checked==true))
+            if ((rbtnObservada.Checked == true) || (rbtnAnulada.Checked == true))
             {
 
+                if (rbtnObservada.Checked == true)
+                {
+
+                
                 if (rbtnObservada.Checked == true) observada = true;
 
                 if (rbtnAnulada.Checked == true) Anulada = true;
@@ -88,25 +92,39 @@ namespace supportDesk
                     {
                         MessageBox.Show("SOLICITUD NO APLICA PARA CAMBIAR ESTADO", "Consultando", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-
-
-
-
-                    //var DataSolicitud = modelSolicitud.Obtener(str);
-                    //if (DataSolicitud.C5000 > 0)
-                    //{
-                    //    txtEstado.Text = Convert.ToString(DataSolicitud.C5063).ToString();
-                    //    BloquearControles();
-
-                    //}          
+      
 
                 }
-              
+
+          
+        }
+        else if(rbtnAnulada.Checked)
+                {
+
+                    int[] result;
+                    result = modelSolicitud.validaSolicitudDEL(Convert.ToInt64(txtSolicitud.Text));
+
+                    if (result[0] == 1)
+                    {
+                        // Existe en topaz pero en workflow no existe
+
+                    }
+                    else if (result[1] == 1)
+                    {
+                        //Existe en Topaz y en worflow
+
+                    }
+
+
+
+
+          }
             }
             else
             {
                 MessageBox.Show("Favor Elegir la opción a realizar", "Consultando", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+
         }
 
         public void cargarSolicitud(long idSolicitud)

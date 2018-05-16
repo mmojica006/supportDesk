@@ -647,7 +647,74 @@ namespace supportDesk.Model
             return response;
         }
 
+        public int[] validaSolicitudDEL(decimal idsol)
+        {
 
+            int[] response = new int[2] ;
+            try
+            {
+
+
+                var param1 = new SqlParameter
+                {
+                    ParameterName = "@respWF",
+                    SqlDbType = System.Data.SqlDbType.Int,
+                    Direction = System.Data.ParameterDirection.Output
+                };
+                var param2 = new SqlParameter
+                {
+                    ParameterName = "@respTopaz",
+                    SqlDbType = System.Data.SqlDbType.Int,
+                    Direction = System.Data.ParameterDirection.Output
+                };
+
+                var procResult = new SqlParameter
+                {
+                    ParameterName = "@procResult",
+                    SqlDbType = SqlDbType.Int,
+                    Direction = ParameterDirection.Output
+                };
+
+
+                using (var ctx = new ceContext())
+                {
+                    int result = ctx.Database.ExecuteSqlCommand("exec @procResult =  nic.USPE_SD_VALIDAEST_DEL @codSol, @respWF OUTPUT, @respTopaz OUTPUT",
+                         new object[]
+                         {
+                            new SqlParameter
+                            {
+                                ParameterName = "@codSol",
+                                Value =idsol,
+                                SqlDbType = SqlDbType.Decimal,
+                                Direction= ParameterDirection.Input
+                            },
+                            param1,
+                            param2,
+                            procResult
+
+                         }
+
+
+
+                         );
+
+                    int res0 = (int)param1.Value;
+                    int res1 = (int)param2.Value;
+                    int resp = (int)procResult.Value;
+
+                    response[0] = res0;
+                    response[1] = res1;
+
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return response;
+        }
 
 
 
