@@ -19,37 +19,34 @@ namespace supportDesk
         private SL_SolicitudCredito modelSolicitud = new SL_SolicitudCredito();
         private tbl_logEstado modelLogEstado = new tbl_logEstado();
 
-     public Form1()
+        public bool observada = false;
+        public bool Anulada = false;
+
+        frmLogin flogin;
+        public string usuario;
+
+        public Form1(string usuario)
         {
+            this.usuario = usuario;
             InitializeComponent();
          
             dgvSolicitudes.AutoGenerateColumns = false;
 
             // callProcedure();
             //callProc(2000057);
-            callProcedure2(2000057); 
+            //callProcedure2(2000057); 
 
         }
+      
 
         private void callProcedure2(int v)
         {
 
-            int result = modelSolicitud.validaProcedure(v);
+            int result = modelSolicitud.validaSolicitud(v);
            
         }
 
-        private void callProc(decimal v)
-        {
-            var a =  modelSolicitud.listadoSol(v);
-            Console.WriteLine(
-               string.Format(
-                      "Solicitud {0}, estado {1}, cliente {2}",
-                      a.idsolicitud,
-                      a.estado,
-                      a.nombre
-                   )
-               );
-        }
+       
 
         private void callProcedure()
         {
@@ -72,23 +69,43 @@ namespace supportDesk
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            if (txtSolicitud.Text != string.Empty)
+            if ((rbtnObservada.Checked==true)|| (rbtnAnulada.Checked==true))
             {
-                long str = Convert.ToInt64(txtSolicitud.Text);
-                cleanGridView();
-                cargarSolicitud(str);
+
+                if (rbtnObservada.Checked == true) observada = true;
+
+                if (rbtnAnulada.Checked == true) Anulada = true;
+
+                if (txtSolicitud.Text != string.Empty)
+                {
+                    if (modelSolicitud.validaSolicitud(Convert.ToInt64(txtSolicitud.Text)) == 1)
+                    {
+                        long str = Convert.ToInt64(txtSolicitud.Text);
+                        cleanGridView();
+                        cargarSolicitud(str);
+                    }
+                    else
+                    {
+                        MessageBox.Show("SOLICITUD NO APLICA PARA CAMBIAR ESTADO", "Consultando", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
 
 
+
+
+                    //var DataSolicitud = modelSolicitud.Obtener(str);
+                    //if (DataSolicitud.C5000 > 0)
+                    //{
+                    //    txtEstado.Text = Convert.ToString(DataSolicitud.C5063).ToString();
+                    //    BloquearControles();
+
+                    //}          
+
+                }
               
-
-                //var DataSolicitud = modelSolicitud.Obtener(str);
-                //if (DataSolicitud.C5000 > 0)
-                //{
-                //    txtEstado.Text = Convert.ToString(DataSolicitud.C5063).ToString();
-                //    BloquearControles();
-
-                //}          
-                            
+            }
+            else
+            {
+                MessageBox.Show("Favor Elegir la opción a realizar", "Consultando", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -154,5 +171,11 @@ namespace supportDesk
             new frmDetalle( Convert.ToInt64( dgvSolicitudes.Rows[e.RowIndex].Cells[0].Value), this).ShowDialog();
 
         }
+
+        private void txtSolicitud_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+    
     }
 }

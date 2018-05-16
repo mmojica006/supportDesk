@@ -36,70 +36,66 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cmbEstados = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 25);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(12, 38);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 13);
+            this.label1.Size = new System.Drawing.Size(69, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Solicitud";
             // 
             // txtSol
             // 
-            this.txtSol.Location = new System.Drawing.Point(73, 25);
-            this.txtSol.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtSol.Location = new System.Drawing.Point(125, 38);
             this.txtSol.Name = "txtSol";
             this.txtSol.ReadOnly = true;
-            this.txtSol.Size = new System.Drawing.Size(185, 20);
+            this.txtSol.Size = new System.Drawing.Size(276, 26);
             this.txtSol.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 60);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Location = new System.Drawing.Point(12, 92);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 13);
+            this.label2.Size = new System.Drawing.Size(60, 20);
             this.label2.TabIndex = 2;
             this.label2.Text = "Estado";
             // 
             // txtState
             // 
-            this.txtState.Location = new System.Drawing.Point(73, 58);
-            this.txtState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtState.Location = new System.Drawing.Point(125, 89);
             this.txtState.Name = "txtState";
-            this.txtState.Size = new System.Drawing.Size(185, 20);
+            this.txtState.ReadOnly = true;
+            this.txtState.Size = new System.Drawing.Size(276, 26);
             this.txtState.TabIndex = 3;
             // 
             // txtComment
             // 
-            this.txtComment.Location = new System.Drawing.Point(73, 90);
-            this.txtComment.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtComment.Location = new System.Drawing.Point(125, 186);
             this.txtComment.Multiline = true;
             this.txtComment.Name = "txtComment";
-            this.txtComment.Size = new System.Drawing.Size(185, 112);
+            this.txtComment.Size = new System.Drawing.Size(276, 170);
             this.txtComment.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 94);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Location = new System.Drawing.Point(12, 193);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(60, 13);
+            this.label3.Size = new System.Drawing.Size(91, 20);
             this.label3.TabIndex = 4;
             this.label3.Text = "Comentario";
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(52, 241);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnSave.Location = new System.Drawing.Point(162, 372);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(62, 25);
+            this.btnSave.Size = new System.Drawing.Size(93, 38);
             this.btnSave.TabIndex = 6;
             this.btnSave.Text = "Modificar";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -108,20 +104,40 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(118, 241);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancel.Location = new System.Drawing.Point(261, 372);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(58, 25);
+            this.btnCancel.Size = new System.Drawing.Size(87, 38);
             this.btnCancel.TabIndex = 7;
             this.btnCancel.Text = "Cancelar";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 142);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(109, 20);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Nuevo Estado";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
+            // cmbEstados
+            // 
+            this.cmbEstados.Enabled = false;
+            this.cmbEstados.FormattingEnabled = true;
+            this.cmbEstados.Location = new System.Drawing.Point(125, 139);
+            this.cmbEstados.Name = "cmbEstados";
+            this.cmbEstados.Size = new System.Drawing.Size(276, 28);
+            this.cmbEstados.TabIndex = 8;
+            // 
             // frmDetalle
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(269, 274);
+            this.ClientSize = new System.Drawing.Size(457, 422);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.cmbEstados);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtComment);
@@ -130,7 +146,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtSol);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "frmDetalle";
             this.Text = "Detalle de la Solicitud";
             this.Load += new System.EventHandler(this.frmDetalle_Load);
@@ -149,5 +164,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cmbEstados;
     }
 }

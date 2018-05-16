@@ -551,6 +551,23 @@ namespace supportDesk.Model
 
 
         }
+
+        public List<uspe_sd_estados> EstadoSolicitud()
+        {
+            try
+            {
+                using (var ctx= new ceContext())
+                {
+
+                    return ctx.Database.SqlQuery<uspe_sd_estados>("nic.USPE_SD_ESTADOS").ToList();
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public usp_solicitud listadoSol(decimal idSolicitud)
         {
             try
@@ -569,17 +586,13 @@ namespace supportDesk.Model
 
         }
 
-        public int validaProcedure(decimal idsol)
+        public int validaSolicitud(decimal idsol)
         {
-            int result=0;
+   
+            int response = 0;
             try
             {
-                var param1 = new SqlParameter
-                {
-                    ParameterName = "@idsolicitud",
-                    SqlDbType = System.Data.SqlDbType.Decimal,
-                    Direction = System.Data.ParameterDirection.Input
-                };
+        
 
                 var param2 = new SqlParameter
                 {
@@ -598,12 +611,12 @@ namespace supportDesk.Model
 
                 using (var ctx = new ceContext())
                 {
-                    result = ctx.Database.ExecuteSqlCommand("exec @procResult =  usp_valida @idsolicitud, @valida OUTPUT"  ,
+                   int result = ctx.Database.ExecuteSqlCommand("exec @procResult =  nic.USPE_SD_VALIDAEST @codsolicitud, @valida OUTPUT",
                         new object[]
                         {
                             new SqlParameter
                             {
-                                ParameterName = "@idsolicitud",
+                                ParameterName = "@codsolicitud",
                                 Value =idsol,
                                 SqlDbType = SqlDbType.Decimal,
                                 Direction= ParameterDirection.Input
@@ -615,7 +628,7 @@ namespace supportDesk.Model
 
                         );
 
-                    int response = (int)param2.Value;
+                     response = (int)param2.Value;
                     int resp = (int)procResult.Value;
 
 
@@ -631,7 +644,7 @@ namespace supportDesk.Model
                 throw;
             }
 
-            return result;
+            return response;
         }
 
 

@@ -20,37 +20,57 @@ namespace supportDesk
         private SL_SolicitudCredito modelSolicitud = new SL_SolicitudCredito();
         private tbl_logEstado modelLogEstado = new tbl_logEstado();
 
+        
 
-   
+
+
+
 
         public frmDetalle(long idSolicitud, Form1 frm1)
         {
             this.idSolicitud = idSolicitud;
             this.form = frm1;
+            
 
 
             var dataSolicitud = modelSolicitud.Obtener(this.idSolicitud);
             this.estadoAnterior = Convert.ToDecimal(dataSolicitud.C5063);
 
-            InitializeComponent();
+     
+
+                InitializeComponent();
 
         }
 
         private void frmDetalle_Load(object sender, EventArgs e)
         {
-
+           
             txtSol.Text = this.idSolicitud.ToString();
 
             if (this.idSolicitud > 0)
             {
+              
+
                 btnSave.Visible = true;
                 var dataSolicitud = modelSolicitud.Obtener(this.idSolicitud);
 
                 txtState.Text = dataSolicitud.C5063.ToString();
 
-            }
 
+                cmbEstados.DataSource = modelSolicitud.EstadoSolicitud();
+                cmbEstados.ValueMember = "CodEstado";
+                cmbEstados.DisplayMember = "DescEstado";
+                if (form.observada)
+                {
+                    cmbEstados.SelectedIndex = 0;
+                }else
+                {
+                    cmbEstados.SelectedIndex = 1;
+                }
 
+            }       
+          
+            
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -62,7 +82,7 @@ namespace supportDesk
             {
                 
 
-               if ( modelSolicitud.Guardar(this.idSolicitud, int.Parse(txtState.Text)))
+               if ( modelSolicitud.Guardar(this.idSolicitud, Convert.ToInt16(cmbEstados.SelectedValue)))
                 {
                     var dataAlumno = new tbl_logEstado
                     {
@@ -70,9 +90,9 @@ namespace supportDesk
                         Objeto = "SL_SolicitudCredito",
                         MotivoCambio = txtComment.Text,
                         Parametro = "INSERT",
-                        EstadoAnterior = Convert.ToInt16(this.estadoAnterior),
+                        EstadoAnterior = Convert.ToInt16(cmbEstados.SelectedValue),
                         NuevoEstado = int.Parse(txtState.Text),
-                        Usuario = "MMOJICA"
+                        Usuario = form.usuario
                     };
 
                     modelLogEstado.Guardar(dataAlumno);
@@ -97,6 +117,11 @@ namespace supportDesk
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
