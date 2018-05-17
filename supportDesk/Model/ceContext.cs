@@ -15,6 +15,8 @@ namespace supportDesk.Model
         public virtual DbSet<SL_SolicitudCredito> SL_SolicitudCredito { get; set; }
         public virtual DbSet<tbl_logEstado> tbl_logEstado { get; set; }
 
+
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<SL_SolicitudCredito>()

@@ -449,7 +449,7 @@ namespace supportDesk.Model
         [Column(TypeName = "numeric")]
         public decimal? SUCURSAL_BANCO_BN { get; set; }
 
-        public SL_SolicitudCredito Obtener (long idSolicitud)
+        public SL_SolicitudCredito Obtener(long idSolicitud)
         {
             var dataSolicitud = new SL_SolicitudCredito();
             try
@@ -461,85 +461,57 @@ namespace supportDesk.Model
 
                 }
 
-            }catch (Exception)
+            }
+            catch (Exception)
             {
                 throw;
             }
             return dataSolicitud;
         }
 
-        public bool  Guardar (decimal solicitud, decimal Estado)
+        public bool Guardar(decimal solicitud, decimal Estado)
         {
 
-            var dataSolicitud = new SL_SolicitudCredito() { C5000 = solicitud,C5063= Estado };
+            var dataSolicitud = new SL_SolicitudCredito() { C5000 = solicitud, C5063 = Estado };
             var datSo = new SL_SolicitudCredito();
-           
+
             try
             {
                 using (var ctx = new ceContext())
                 {
 
-                if (solicitud > 0)
+                    if (solicitud > 0)
                     {
-                        //var query = (from q in ctx.SL_SolicitudCredito where q.C5000 == solicitud
-                        //             select q).First();
-
-                        //query.C5063 = Estado;
 
 
-                        //ctx.SL_SolicitudCredito.Attach(dataSolicitud);
-                        //ctx.Entry(dataSolicitud).Property(x => x.C5063).IsModified = true;
-                        //ctx.SaveChanges();
-
-                        var sol = ctx.SL_SolicitudCredito.First(x=>x.C5000== solicitud);
+                        var sol = ctx.SL_SolicitudCredito.First(x => x.C5000 == solicitud);
                         sol.C5063 = Estado;
                         ctx.SaveChanges();
-
-
-
-
-
+                        
                     }
                     return true;
 
                 }
 
-            }       
+            }
 
             catch (Exception)
-            {           
-               
+            {
+
                 return false;
             }
-  
+
 
         }
 
-        //public int validateEstado(decimal idSolicitud)
-        //{
-        //    try
-        //    {
-        //        using (var ctx = new ceContext())
-        //        {
-        //            ObjectParameter outputValida = new ObjectParameter("@valida",typeof(int));
 
-                   
-        //             var result = ctx.Database.SqlQuery<SL_SolicitudCredito>("nic.USPE_SUPPORT_VALIDAESTADO")
-        //        }
 
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
-
-        public List<usp_solicitud>  listadoSol()
+        public List<usp_solicitud> listadoSol()
         {
             try
             {
 
-                using (var ctx =  new ceContext())
+                using (var ctx = new ceContext())
                 {
                     return ctx.Database.SqlQuery<usp_solicitud>("usp_solicitud").ToList();
                 }
@@ -556,7 +528,7 @@ namespace supportDesk.Model
         {
             try
             {
-                using (var ctx= new ceContext())
+                using (var ctx = new ceContext())
                 {
 
                     return ctx.Database.SqlQuery<uspe_sd_estados>("nic.USPE_SD_ESTADOS").ToList();
@@ -586,13 +558,32 @@ namespace supportDesk.Model
 
         }
 
+        public uspe_get_process_sol getProccesWF(decimal idSolicitud)
+        {
+            try
+            {
+
+                using (var ctx = new ceContext())
+                {
+                    return ctx.Database.SqlQuery<uspe_get_process_sol>("USPE_GET_PROCESS_SOL @p0", idSolicitud).SingleOrDefault();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+
+        }
+
+
         public int validaSolicitud(decimal idsol)
         {
-   
+
             int response = 0;
             try
             {
-        
+
 
                 var param2 = new SqlParameter
                 {
@@ -611,9 +602,9 @@ namespace supportDesk.Model
 
                 using (var ctx = new ceContext())
                 {
-                   int result = ctx.Database.ExecuteSqlCommand("exec @procResult =  nic.USPE_SD_VALIDAEST @codsolicitud, @valida OUTPUT",
-                        new object[]
-                        {
+                    int result = ctx.Database.ExecuteSqlCommand("exec @procResult =  nic.USPE_SD_VALIDAEST @codsolicitud, @valida OUTPUT",
+                         new object[]
+                         {
                             new SqlParameter
                             {
                                 ParameterName = "@codsolicitud",
@@ -624,17 +615,17 @@ namespace supportDesk.Model
                             param2,
                             procResult
 
-                        }
+                         }
 
-                        );
+                         );
 
-                     response = (int)param2.Value;
+                    response = (int)param2.Value;
                     int resp = (int)procResult.Value;
 
 
 
 
-                  
+
 
                 }
 
@@ -647,10 +638,76 @@ namespace supportDesk.Model
             return response;
         }
 
+        public bool updateWF(decimal id, int open, decimal process)
+        {
+          
+            try
+            {
+
+
+                var procResult = new SqlParameter
+                {
+                    ParameterName = "@procResult",
+                    SqlDbType = SqlDbType.Int,
+                    Direction = ParameterDirection.Output
+                };
+
+
+                using (var ctx = new ceContext())
+                {
+                    int result = ctx.Database.ExecuteSqlCommand("exec @procResult =  USPE_PROCESSWF_UP @pId, @pOpen, @processId",
+                         new object[]
+                         {
+                            new SqlParameter
+                            {
+                                ParameterName = "@pId",
+                                Value =id,
+                                SqlDbType = SqlDbType.Decimal,
+                                Direction= ParameterDirection.Input
+                            },
+                                    new SqlParameter
+                            {
+                                ParameterName = "@pOpen",
+                                Value =open,
+                                SqlDbType = SqlDbType.Int,
+                                Direction= ParameterDirection.Input
+                            },
+                                                     new SqlParameter
+                            {
+                                ParameterName = "@processId",
+                                Value =process,
+                                SqlDbType = SqlDbType.Decimal,
+                                Direction= ParameterDirection.Input
+                            },
+
+                            procResult
+
+                         }
+
+                         );
+                    int resp = result;
+                    return true;
+
+
+
+
+
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+     
+
+        }
         public int[] validaSolicitudDEL(decimal idsol)
         {
 
-            int[] response = new int[2] ;
+            int[] response = new int[2];
             try
             {
 
@@ -698,8 +755,8 @@ namespace supportDesk.Model
 
                          );
 
-                    int res0 = (int)param1.Value;
-                    int res1 = (int)param2.Value;
+                    int res0 = (int)param1.Value; //si es 1 Eliminar solamente en solicitudes
+                    int res1 = (int)param2.Value;// si es 1 eliminar en solicitudes y topaz
                     int resp = (int)procResult.Value;
 
                     response[0] = res0;
@@ -717,7 +774,26 @@ namespace supportDesk.Model
         }
 
 
+        public bool updateWF(decimal id_ , decimal process_)
+        {
+            bool result = false;
+            try
+            {
+                using (var ctx = new ceContext())
+                {
+                    int noOfRowUpdated = ctx.Database.ExecuteSqlCommand("update JBPM_TASKINSTANCE set ISOPEN_ = 0 where id_ = 208363 and PROCINST_ = 56733");
+                }
 
+                result= true;
+
+            }
+            catch (Exception)
+            {
+                result= false;
+            }
+
+            return result;
+        }
 
 
     }

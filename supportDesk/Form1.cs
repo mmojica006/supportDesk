@@ -21,8 +21,10 @@ namespace supportDesk
 
         public bool observada = false;
         public bool Anulada = false;
+        public bool eliminarTop = false;
+        public bool eliminarTopWf = false;
 
-        frmLogin flogin;
+        
         public string usuario;
 
         public Form1(string usuario)
@@ -71,14 +73,14 @@ namespace supportDesk
         {
             if ((rbtnObservada.Checked == true) || (rbtnAnulada.Checked == true))
             {
-
-                if (rbtnObservada.Checked == true)
-                {
-
-                
                 if (rbtnObservada.Checked == true) observada = true;
 
                 if (rbtnAnulada.Checked == true) Anulada = true;
+
+
+                if (rbtnObservada.Checked == true)
+                {                
+            
 
                 if (txtSolicitud.Text != string.Empty)
                 {
@@ -91,11 +93,9 @@ namespace supportDesk
                     else
                     {
                         MessageBox.Show("SOLICITUD NO APLICA PARA CAMBIAR ESTADO", "Consultando", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-      
+                    }      
 
                 }
-
           
         }
         else if(rbtnAnulada.Checked)
@@ -103,17 +103,25 @@ namespace supportDesk
 
                     int[] result;
                     result = modelSolicitud.validaSolicitudDEL(Convert.ToInt64(txtSolicitud.Text));
+                   
 
-                    if (result[0] == 1)
+              
+
+                    if ((result[0] == 1) || (result[1] == 1))
                     {
+                      
+                       
                         // Existe en topaz pero en workflow no existe
+                        cargarSolicitud((Convert.ToInt64(txtSolicitud.Text)));
+                        if (result[0] == 1)
+                            eliminarTop = true; //Eliminar solamente en solicitudes
+
+                        if (result[1] == 1)
+                            eliminarTopWf = true; //Eliminar en solicitudes y workflow
+
 
                     }
-                    else if (result[1] == 1)
-                    {
-                        //Existe en Topaz y en worflow
-
-                    }
+                    
 
 
 

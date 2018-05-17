@@ -78,6 +78,8 @@
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\ceContext.cs" />
+    <Compile Include="Model\jbpm_taskinstance.cs" />
+    <Compile Include="Model\Procedure\uspe_get_process_sol.cs" />
     <Compile Include="Model\Procedure\uspe_sd_estados.cs" />
     <Compile Include="Model\Procedure\usp_solicitud.cs" />
     <Compile Include="Model\SL_SolicitudCredito.cs" />

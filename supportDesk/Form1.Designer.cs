@@ -118,10 +118,10 @@
             this.Estado,
             this.Cliente,
             this.Fecha});
-            this.dgvSolicitudes.Location = new System.Drawing.Point(57, 177);
+            this.dgvSolicitudes.Location = new System.Drawing.Point(483, 177);
             this.dgvSolicitudes.Name = "dgvSolicitudes";
             this.dgvSolicitudes.RowTemplate.Height = 28;
-            this.dgvSolicitudes.Size = new System.Drawing.Size(968, 268);
+            this.dgvSolicitudes.Size = new System.Drawing.Size(542, 113);
             this.dgvSolicitudes.TabIndex = 9;
             this.dgvSolicitudes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSolicitudes_CellDoubleClick_1);
             // 
