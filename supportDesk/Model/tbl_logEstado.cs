@@ -8,7 +8,7 @@ namespace supportDesk.Model
     using System.Linq;
     using System.Data.Entity;
 
-    [Table("nic.tbl_logEstado")]
+    [Table("tbl_logEstado")]
     public partial class tbl_logEstado
     {
         public int id { get; set; }
@@ -27,9 +27,13 @@ namespace supportDesk.Model
 
         public long solicitud { get; set; }
 
-        public int EstadoAnterior { get; set; }
+        [Required]
+        [StringLength(100)]
+        public string EstadoAnterior { get; set; }
 
-        public int NuevoEstado { get; set; }
+        [Required]
+        [StringLength(100)]
+        public string NuevoEstado { get; set; }
 
         [Required]
         [StringLength(100)]

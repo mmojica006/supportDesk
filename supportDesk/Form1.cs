@@ -23,8 +23,8 @@ namespace supportDesk
         public bool Anulada = false;
         public bool eliminarTop = false;
         public bool eliminarTopWf = false;
+        DateTime Hoy = DateTime.Today;
 
-        
         public string usuario;
 
         public Form1(string usuario)
@@ -38,6 +38,10 @@ namespace supportDesk
             //callProc(2000057);
             //callProcedure2(2000057); 
 
+        }
+        public Form1()
+        {
+            InitializeComponent();
         }
       
 
@@ -73,9 +77,20 @@ namespace supportDesk
         {
             if ((rbtnObservada.Checked == true) || (rbtnAnulada.Checked == true))
             {
-                if (rbtnObservada.Checked == true) observada = true;
+                if (rbtnObservada.Checked == true)
+                {
+                    observada = true;
+                    Anulada = false;
+                }
 
-                if (rbtnAnulada.Checked == true) Anulada = true;
+
+                if (rbtnAnulada.Checked == true)
+                {
+                    Anulada = true;
+                    observada = false;
+                }
+
+                
 
 
                 if (rbtnObservada.Checked == true)
@@ -86,10 +101,20 @@ namespace supportDesk
                 {
                     if (modelSolicitud.validaSolicitud(Convert.ToInt64(txtSolicitud.Text)) == 1)
                     {
-                        long str = Convert.ToInt64(txtSolicitud.Text);
-                        cleanGridView();
-                        cargarSolicitud(str);
-                    }
+
+                            var dataSolicitud = modelSolicitud.getDataSolicitud(Convert.ToInt64(txtSolicitud.Text));
+
+                            txtEstadoActual.Text = Convert.ToString(dataSolicitud.estado);
+                            txtCliente.Text= Convert.ToString(dataSolicitud.nombre);
+                            txtTipoCredito.Text= Convert.ToString(dataSolicitud.tipoCredito);
+                            callStateNew();
+                            radioButtonBlock(false);
+
+
+
+
+
+                        }
                     else
                     {
                         MessageBox.Show("SOLICITUD NO APLICA PARA CAMBIAR ESTADO", "Consultando", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -120,6 +145,17 @@ namespace supportDesk
                             eliminarTopWf = true; //Eliminar en solicitudes y workflow
 
 
+                        var dataSolicitud = modelSolicitud.getDataSolicitud(Convert.ToInt64(txtSolicitud.Text));
+
+                        txtEstadoActual.Text = Convert.ToString(dataSolicitud.estado);
+                        txtCliente.Text = Convert.ToString(dataSolicitud.nombre);
+                        txtTipoCredito.Text = Convert.ToString(dataSolicitud.tipoCredito);
+                        callStateNew();
+                        radioButtonBlock(false);
+
+
+
+
                     }
                     
 
@@ -133,6 +169,21 @@ namespace supportDesk
                 MessageBox.Show("Favor Elegir la opción a realizar", "Consultando", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
+        }
+
+        private void callStateNew()
+        {
+            cmbEstados.DataSource = modelSolicitud.EstadoSolicitud();
+            cmbEstados.ValueMember = "CodEstado";
+            cmbEstados.DisplayMember = "DescEstado";
+            if (observada)
+            {
+                cmbEstados.SelectedIndex = 0;
+            }
+            else
+            {
+                cmbEstados.SelectedIndex = 1;
+            }
         }
 
         public void cargarSolicitud(long idSolicitud)
@@ -193,8 +244,8 @@ namespace supportDesk
 
         private void dgvSolicitudes_CellDoubleClick_1(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex == -1) return;
-            new frmDetalle( Convert.ToInt64( dgvSolicitudes.Rows[e.RowIndex].Cells[0].Value), this).ShowDialog();
+           // if (e.RowIndex == -1) return;
+           // new frmDetalle( Convert.ToInt64( dgvSolicitudes.Rows[e.RowIndex].Cells[0].Value), this).ShowDialog();
 
         }
 
@@ -202,6 +253,166 @@ namespace supportDesk
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
-    
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+
+
+            if ((txtSolicitud.Text != string.Empty) &&
+               (txtEstadoActual.Text != string.Empty) &&
+               (txtComment.Text != string.Empty)
+               )
+            {
+                long idSolicitud = Convert.ToInt64(txtSolicitud.Text);
+
+                if (observada)
+                {
+                    if (MessageBox.Show("SEGURO QUE DESEA CAMBIAR EL ESTADO A OBSERVADO", "CAMBIO DE ESTADO", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        //do something
+             
+                    if (modelSolicitud.Guardar(idSolicitud, Convert.ToInt16(cmbEstados.SelectedValue)))
+                    {
+                        var dataAlumno = new tbl_logEstado
+                        {
+                            solicitud = idSolicitud,
+                            Objeto = "SL_SolicitudCredito",
+                            MotivoCambio = txtComment.Text,
+                            Parametro = "INSERT",
+                            EstadoAnterior = txtEstadoActual.Text,
+                            NuevoEstado = cmbEstados.GetItemText(cmbEstados.SelectedItem),
+                            fecha= Hoy,
+                            Usuario = usuario
+                        };
+
+                        modelLogEstado.Guardar(dataAlumno);
+
+                        MessageBox.Show("SOLICITUD ACTUALIZADA!", "CAMBIO DE ESTADO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        limpiarData();
+                        radioButtonBlock(true);
+                    }
+                    else
+                    {
+                        MessageBox.Show("ERROR EN LA ACTUALIZACION!", "CAMBIO DE ESTADO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    }
+
+
+                }
+                else if (Anulada)
+                {
+
+                    if (eliminarTop)
+                    {
+                        if (modelSolicitud.Guardar(idSolicitud, Convert.ToInt16(cmbEstados.SelectedValue)))
+                        {
+                            var dataAlumno = new tbl_logEstado
+                            {
+                                solicitud = idSolicitud,
+                                Objeto = "SL_SolicitudCredito",
+                                MotivoCambio = txtComment.Text,
+                                Parametro = "DELETE",
+                                EstadoAnterior = txtEstadoActual.Text,
+                                NuevoEstado = cmbEstados.GetItemText(cmbEstados.SelectedItem),
+                                fecha = Hoy,
+                                Usuario = usuario
+                            };
+
+                            modelLogEstado.Guardar(dataAlumno);
+
+                            MessageBox.Show("SOLICITUD ACTUALIZADA!", "CAMBIO DE ESTADO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            limpiarData();
+                            radioButtonBlock(true);
+                        }
+                        else
+                        {
+                            MessageBox.Show("ERROR EN LA ACTUALIZACION!", "CAMBIO DE ESTADO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+
+
+                    }
+                    else if (eliminarTopWf)
+                    {
+
+                        var data = modelSolicitud.getProccesWF(idSolicitud);
+
+                        decimal p0 = Convert.ToInt64(data.id_);
+                        decimal p1 = Convert.ToInt64(data.PROCINST_);
+
+
+                        bool response = modelSolicitud.updateWF(p0, 0, p1);
+
+                        if (modelSolicitud.Guardar(idSolicitud, Convert.ToInt16(cmbEstados.SelectedValue)))
+                        {
+                            var dataAlumno = new tbl_logEstado
+                            {
+                                solicitud = idSolicitud,
+                                Objeto = "SL_SolicitudCredito || JBPM_TASKINSTANCE",
+                                MotivoCambio = txtComment.Text,
+                                Parametro = "DELETE",
+                                EstadoAnterior = txtEstadoActual.Text,
+                                NuevoEstado = cmbEstados.GetItemText(cmbEstados.SelectedItem),
+                                fecha = Hoy,
+                                Usuario = usuario
+                            };
+
+                            modelLogEstado.Guardar(dataAlumno);
+
+                            MessageBox.Show("SOLICITUD ACTUALIZADA!", "CAMBIO DE ESTADO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            limpiarData();
+                            radioButtonBlock(true);
+                        }
+                        else
+                        {
+                            MessageBox.Show("ERROR EN LA ACTUALIZACION!", "CAMBIO DE ESTADO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+
+
+
+
+
+
+                    }
+
+
+                }
+
+
+
+
+
+
+            }
+
+
+        }
+
+        private void limpiarData()
+        {
+            txtSolicitud.Text = string.Empty;
+            cmbEstados.DataSource = null;
+            txtEstadoActual.Text= string.Empty;
+            txtComment.Text = string.Empty;
+            txtTipoCredito.Text = string.Empty;
+            txtCliente.Text = string.Empty;
+        }
+        private void radioButtonBlock(bool bloquear)
+        {
+            rbtnAnulada.Enabled = bloquear;
+            rbtnObservada.Enabled = bloquear;
+            txtSolicitud.Enabled = bloquear;
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            limpiarData();
+            radioButtonBlock(true);
+        }
     }
 }

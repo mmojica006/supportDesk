@@ -46,6 +46,18 @@
             this.txtSolBuscar = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cmbEstados = new System.Windows.Forms.ComboBox();
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.txtComment = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtEstadoActual = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtCliente = new System.Windows.Forms.TextBox();
+            this.txtTipoCredito = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -61,23 +73,35 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 40);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1150, 546);
+            this.tabControl1.Size = new System.Drawing.Size(956, 631);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.txtTipoCredito);
+            this.tabPage1.Controls.Add(this.label7);
+            this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Controls.Add(this.cmbEstados);
+            this.tabPage1.Controls.Add(this.btnLimpiar);
+            this.tabPage1.Controls.Add(this.btnSave);
+            this.tabPage1.Controls.Add(this.txtComment);
+            this.tabPage1.Controls.Add(this.label3);
+            this.tabPage1.Controls.Add(this.txtEstadoActual);
+            this.tabPage1.Controls.Add(this.label5);
+            this.tabPage1.Controls.Add(this.txtCliente);
+            this.tabPage1.Controls.Add(this.label6);
             this.tabPage1.Controls.Add(this.panel1);
-            this.tabPage1.Controls.Add(this.dgvSolicitudes);
             this.tabPage1.Controls.Add(this.txtSolicitud);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.btnBuscar);
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1142, 513);
+            this.tabPage1.Size = new System.Drawing.Size(948, 598);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Modificar Estado";
             this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // panel1
             // 
@@ -85,7 +109,7 @@
             this.panel1.Controls.Add(this.rbtnAnulada);
             this.panel1.Location = new System.Drawing.Point(57, 35);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(967, 78);
+            this.panel1.Size = new System.Drawing.Size(860, 78);
             this.panel1.TabIndex = 11;
             // 
             // rbtnObservada
@@ -118,10 +142,10 @@
             this.Estado,
             this.Cliente,
             this.Fecha});
-            this.dgvSolicitudes.Location = new System.Drawing.Point(47, 177);
+            this.dgvSolicitudes.Location = new System.Drawing.Point(990, 69);
             this.dgvSolicitudes.Name = "dgvSolicitudes";
             this.dgvSolicitudes.RowTemplate.Height = 28;
-            this.dgvSolicitudes.Size = new System.Drawing.Size(978, 142);
+            this.dgvSolicitudes.Size = new System.Drawing.Size(189, 184);
             this.dgvSolicitudes.TabIndex = 9;
             this.dgvSolicitudes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSolicitudes_CellDoubleClick_1);
             // 
@@ -150,10 +174,10 @@
             // 
             // txtSolicitud
             // 
-            this.txtSolicitud.Location = new System.Drawing.Point(152, 132);
+            this.txtSolicitud.Location = new System.Drawing.Point(165, 132);
             this.txtSolicitud.MaxLength = 15;
             this.txtSolicitud.Name = "txtSolicitud";
-            this.txtSolicitud.Size = new System.Drawing.Size(754, 26);
+            this.txtSolicitud.Size = new System.Drawing.Size(276, 26);
             this.txtSolicitud.TabIndex = 2;
             this.txtSolicitud.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSolicitud_KeyPress);
             // 
@@ -168,7 +192,7 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(932, 132);
+            this.btnBuscar.Location = new System.Drawing.Point(462, 126);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(92, 38);
             this.btnBuscar.TabIndex = 0;
@@ -224,12 +248,120 @@
             this.tabPage3.Text = "Consultas";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(514, 249);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(109, 20);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "Nuevo Estado";
+            // 
+            // cmbEstados
+            // 
+            this.cmbEstados.Enabled = false;
+            this.cmbEstados.FormattingEnabled = true;
+            this.cmbEstados.Location = new System.Drawing.Point(641, 246);
+            this.cmbEstados.Name = "cmbEstados";
+            this.cmbEstados.Size = new System.Drawing.Size(276, 28);
+            this.cmbEstados.TabIndex = 20;
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Location = new System.Drawing.Point(485, 497);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(87, 38);
+            this.btnLimpiar.TabIndex = 19;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(364, 497);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(93, 38);
+            this.btnSave.TabIndex = 18;
+            this.btnSave.Text = "Actualizar";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // txtComment
+            // 
+            this.txtComment.Location = new System.Drawing.Point(165, 298);
+            this.txtComment.MaxLength = 1000;
+            this.txtComment.Multiline = true;
+            this.txtComment.Name = "txtComment";
+            this.txtComment.Size = new System.Drawing.Size(752, 170);
+            this.txtComment.TabIndex = 17;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(52, 305);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(91, 20);
+            this.label3.TabIndex = 16;
+            this.label3.Text = "Comentario";
+            // 
+            // txtEstadoActual
+            // 
+            this.txtEstadoActual.Location = new System.Drawing.Point(165, 243);
+            this.txtEstadoActual.Name = "txtEstadoActual";
+            this.txtEstadoActual.ReadOnly = true;
+            this.txtEstadoActual.Size = new System.Drawing.Size(339, 26);
+            this.txtEstadoActual.TabIndex = 15;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(52, 246);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(107, 20);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Estado actual";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(52, 192);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(58, 20);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Cliente";
+            // 
+            // txtCliente
+            // 
+            this.txtCliente.Location = new System.Drawing.Point(165, 192);
+            this.txtCliente.Name = "txtCliente";
+            this.txtCliente.ReadOnly = true;
+            this.txtCliente.Size = new System.Drawing.Size(339, 26);
+            this.txtCliente.TabIndex = 13;
+            // 
+            // txtTipoCredito
+            // 
+            this.txtTipoCredito.Location = new System.Drawing.Point(641, 192);
+            this.txtTipoCredito.Name = "txtTipoCredito";
+            this.txtTipoCredito.ReadOnly = true;
+            this.txtTipoCredito.Size = new System.Drawing.Size(276, 26);
+            this.txtTipoCredito.TabIndex = 23;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(510, 192);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(113, 20);
+            this.label7.TabIndex = 22;
+            this.label7.Text = "Tipo de crédito";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1182, 598);
+            this.ClientSize = new System.Drawing.Size(1275, 683);
             this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.dgvSolicitudes);
             this.Name = "Form1";
             this.Text = "Cambios Estados TOPAZ";
             this.tabControl1.ResumeLayout(false);
@@ -264,6 +396,18 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RadioButton rbtnObservada;
         private System.Windows.Forms.RadioButton rbtnAnulada;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cmbEstados;
+        private System.Windows.Forms.Button btnLimpiar;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.TextBox txtComment;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtEstadoActual;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtCliente;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtTipoCredito;
+        private System.Windows.Forms.Label label7;
     }
 }
 

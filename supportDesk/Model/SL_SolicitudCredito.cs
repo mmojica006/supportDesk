@@ -540,14 +540,14 @@ namespace supportDesk.Model
                 throw;
             }
         }
-        public usp_solicitud listadoSol(decimal idSolicitud)
+        public usp_solicitud getDataSolicitud(decimal idSolicitud)
         {
             try
             {
 
                 using (var ctx = new ceContext())
                 {
-                    return ctx.Database.SqlQuery<usp_solicitud>("usp_solicitud @p0", idSolicitud).SingleOrDefault();
+                    return ctx.Database.SqlQuery<usp_solicitud>("usp_solicitud_data @p0", idSolicitud).SingleOrDefault();
                 }
             }
             catch (Exception)
