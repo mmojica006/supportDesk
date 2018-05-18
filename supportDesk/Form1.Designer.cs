@@ -30,17 +30,8 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.rbtnObservada = new System.Windows.Forms.RadioButton();
-            this.rbtnAnulada = new System.Windows.Forms.RadioButton();
-            this.txtSolicitud = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnBuscar = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
-            this.txtSolBuscar = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.txtTipoCredito = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbEstados = new System.Windows.Forms.ComboBox();
             this.btnLimpiar = new System.Windows.Forms.Button();
@@ -49,20 +40,31 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtEstadoActual = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.txtCliente = new System.Windows.Forms.TextBox();
-            this.txtTipoCredito = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.rbtnObservada = new System.Windows.Forms.RadioButton();
+            this.rbtnAnulada = new System.Windows.Forms.RadioButton();
+            this.txtSolicitud = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.dtpFin = new System.Windows.Forms.DateTimePicker();
+            this.dtpInicio = new System.Windows.Forms.DateTimePicker();
+            this.button1 = new System.Windows.Forms.Button();
+            this.dgvReporte = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReporte)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(12, 40);
             this.tabControl1.Name = "tabControl1";
@@ -97,112 +99,22 @@
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
-            // panel1
+            // txtTipoCredito
             // 
-            this.panel1.Controls.Add(this.rbtnObservada);
-            this.panel1.Controls.Add(this.rbtnAnulada);
-            this.panel1.Location = new System.Drawing.Point(57, 35);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(860, 78);
-            this.panel1.TabIndex = 11;
+            this.txtTipoCredito.Location = new System.Drawing.Point(641, 192);
+            this.txtTipoCredito.Name = "txtTipoCredito";
+            this.txtTipoCredito.ReadOnly = true;
+            this.txtTipoCredito.Size = new System.Drawing.Size(276, 26);
+            this.txtTipoCredito.TabIndex = 23;
             // 
-            // rbtnObservada
+            // label7
             // 
-            this.rbtnObservada.AutoSize = true;
-            this.rbtnObservada.Location = new System.Drawing.Point(3, 26);
-            this.rbtnObservada.Name = "rbtnObservada";
-            this.rbtnObservada.Size = new System.Drawing.Size(111, 24);
-            this.rbtnObservada.TabIndex = 2;
-            this.rbtnObservada.TabStop = true;
-            this.rbtnObservada.Text = "Observada";
-            this.rbtnObservada.UseVisualStyleBackColor = true;
-            // 
-            // rbtnAnulada
-            // 
-            this.rbtnAnulada.AutoSize = true;
-            this.rbtnAnulada.Location = new System.Drawing.Point(144, 26);
-            this.rbtnAnulada.Name = "rbtnAnulada";
-            this.rbtnAnulada.Size = new System.Drawing.Size(93, 24);
-            this.rbtnAnulada.TabIndex = 10;
-            this.rbtnAnulada.TabStop = true;
-            this.rbtnAnulada.Text = "Anulada";
-            this.rbtnAnulada.UseVisualStyleBackColor = true;
-            // 
-            // txtSolicitud
-            // 
-            this.txtSolicitud.Location = new System.Drawing.Point(165, 132);
-            this.txtSolicitud.MaxLength = 15;
-            this.txtSolicitud.Name = "txtSolicitud";
-            this.txtSolicitud.Size = new System.Drawing.Size(276, 26);
-            this.txtSolicitud.TabIndex = 2;
-            this.txtSolicitud.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSolicitud_KeyPress);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(52, 132);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 20);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Solicitud";
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.Location = new System.Drawing.Point(462, 126);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(92, 38);
-            this.btnBuscar.TabIndex = 0;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.button1);
-            this.tabPage2.Controls.Add(this.txtSolBuscar);
-            this.tabPage2.Controls.Add(this.label4);
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1142, 513);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Anular Solicitud";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(966, 32);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(92, 38);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Buscar";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // txtSolBuscar
-            // 
-            this.txtSolBuscar.Location = new System.Drawing.Point(172, 38);
-            this.txtSolBuscar.Name = "txtSolBuscar";
-            this.txtSolBuscar.Size = new System.Drawing.Size(754, 26);
-            this.txtSolBuscar.TabIndex = 4;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(74, 38);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(69, 20);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Solicitud";
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 29);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1142, 513);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Consultas";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(510, 192);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(113, 20);
+            this.label7.TabIndex = 22;
+            this.label7.Text = "Tipo de crédito";
             // 
             // label2
             // 
@@ -277,6 +189,14 @@
             this.label5.TabIndex = 14;
             this.label5.Text = "Estado actual";
             // 
+            // txtCliente
+            // 
+            this.txtCliente.Location = new System.Drawing.Point(165, 192);
+            this.txtCliente.Name = "txtCliente";
+            this.txtCliente.ReadOnly = true;
+            this.txtCliente.Size = new System.Drawing.Size(339, 26);
+            this.txtCliente.TabIndex = 13;
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -286,36 +206,141 @@
             this.label6.TabIndex = 12;
             this.label6.Text = "Cliente";
             // 
-            // txtCliente
+            // panel1
             // 
-            this.txtCliente.Location = new System.Drawing.Point(165, 192);
-            this.txtCliente.Name = "txtCliente";
-            this.txtCliente.ReadOnly = true;
-            this.txtCliente.Size = new System.Drawing.Size(339, 26);
-            this.txtCliente.TabIndex = 13;
+            this.panel1.Controls.Add(this.rbtnObservada);
+            this.panel1.Controls.Add(this.rbtnAnulada);
+            this.panel1.Location = new System.Drawing.Point(57, 35);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(860, 78);
+            this.panel1.TabIndex = 11;
             // 
-            // txtTipoCredito
+            // rbtnObservada
             // 
-            this.txtTipoCredito.Location = new System.Drawing.Point(641, 192);
-            this.txtTipoCredito.Name = "txtTipoCredito";
-            this.txtTipoCredito.ReadOnly = true;
-            this.txtTipoCredito.Size = new System.Drawing.Size(276, 26);
-            this.txtTipoCredito.TabIndex = 23;
+            this.rbtnObservada.AutoSize = true;
+            this.rbtnObservada.Location = new System.Drawing.Point(3, 26);
+            this.rbtnObservada.Name = "rbtnObservada";
+            this.rbtnObservada.Size = new System.Drawing.Size(111, 24);
+            this.rbtnObservada.TabIndex = 2;
+            this.rbtnObservada.TabStop = true;
+            this.rbtnObservada.Text = "Observada";
+            this.rbtnObservada.UseVisualStyleBackColor = true;
             // 
-            // label7
+            // rbtnAnulada
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(510, 192);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(113, 20);
-            this.label7.TabIndex = 22;
-            this.label7.Text = "Tipo de crédito";
+            this.rbtnAnulada.AutoSize = true;
+            this.rbtnAnulada.Location = new System.Drawing.Point(144, 26);
+            this.rbtnAnulada.Name = "rbtnAnulada";
+            this.rbtnAnulada.Size = new System.Drawing.Size(93, 24);
+            this.rbtnAnulada.TabIndex = 10;
+            this.rbtnAnulada.TabStop = true;
+            this.rbtnAnulada.Text = "Anulada";
+            this.rbtnAnulada.UseVisualStyleBackColor = true;
+            // 
+            // txtSolicitud
+            // 
+            this.txtSolicitud.Location = new System.Drawing.Point(165, 132);
+            this.txtSolicitud.MaxLength = 15;
+            this.txtSolicitud.Name = "txtSolicitud";
+            this.txtSolicitud.Size = new System.Drawing.Size(276, 26);
+            this.txtSolicitud.TabIndex = 2;
+            this.txtSolicitud.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSolicitud_KeyPress);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(52, 132);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(69, 20);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Solicitud";
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.Location = new System.Drawing.Point(462, 126);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(92, 38);
+            this.btnBuscar.TabIndex = 0;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.label8);
+            this.tabPage3.Controls.Add(this.label4);
+            this.tabPage3.Controls.Add(this.dtpFin);
+            this.tabPage3.Controls.Add(this.dtpInicio);
+            this.tabPage3.Controls.Add(this.button1);
+            this.tabPage3.Controls.Add(this.dgvReporte);
+            this.tabPage3.Location = new System.Drawing.Point(4, 29);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(948, 598);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Consultas";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(40, 99);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(94, 20);
+            this.label8.TabIndex = 5;
+            this.label8.Text = "FECHA FIN";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(40, 43);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(117, 20);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "FECHA INICIO";
+            // 
+            // dtpFin
+            // 
+            this.dtpFin.CustomFormat = "";
+            this.dtpFin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFin.Location = new System.Drawing.Point(163, 93);
+            this.dtpFin.Name = "dtpFin";
+            this.dtpFin.Size = new System.Drawing.Size(200, 26);
+            this.dtpFin.TabIndex = 3;
+            // 
+            // dtpInicio
+            // 
+            this.dtpInicio.CustomFormat = "";
+            this.dtpInicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpInicio.Location = new System.Drawing.Point(163, 37);
+            this.dtpInicio.Name = "dtpInicio";
+            this.dtpInicio.Size = new System.Drawing.Size(200, 26);
+            this.dtpInicio.TabIndex = 2;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(398, 37);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(109, 41);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Consultar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // dgvReporte
+            // 
+            this.dgvReporte.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvReporte.Location = new System.Drawing.Point(30, 153);
+            this.dgvReporte.Name = "dgvReporte";
+            this.dgvReporte.RowTemplate.Height = 28;
+            this.dgvReporte.Size = new System.Drawing.Size(887, 294);
+            this.dgvReporte.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1032, 683);
+            this.ClientSize = new System.Drawing.Size(999, 683);
             this.Controls.Add(this.tabControl1);
             this.Name = "Form1";
             this.Text = "Cambios Estados TOPAZ";
@@ -324,8 +349,9 @@
             this.tabPage1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReporte)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -334,13 +360,9 @@
 
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TextBox txtSolicitud;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnBuscar;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox txtSolBuscar;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RadioButton rbtnObservada;
@@ -357,6 +379,12 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtTipoCredito;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.DataGridView dgvReporte;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DateTimePicker dtpFin;
+        private System.Windows.Forms.DateTimePicker dtpInicio;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label4;
     }
 }
 

@@ -147,16 +147,9 @@ namespace supportDesk
                         callStateNew();
                         radioButtonBlock(false);
 
-
-
-
                     }
                     
-
-
-
-
-          }
+                 }
             }
             else
             {
@@ -376,6 +369,21 @@ namespace supportDesk
         {
             limpiarData();
             radioButtonBlock(true);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            dtpInicio.Format = DateTimePickerFormat.Custom;
+            dtpFin.Format = DateTimePickerFormat.Custom;
+
+
+            string fechaInicio = dtpInicio.Value.ToShortDateString();
+            string fechaFin = dtpFin.Value.ToShortDateString();
+
+
+            Convert.ToDateTime(fechaInicio).ToString("yyyyMMdd");
+
+            dgvReporte.DataSource = modelLogEstado.getReport(Convert.ToDateTime(fechaInicio).ToString("yyyyMMdd"), Convert.ToDateTime(fechaFin).ToString("yyyyMMdd"));
         }
     }
 }

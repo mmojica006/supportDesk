@@ -75,6 +75,7 @@
     <Compile Include="Model\jbpm_taskinstance.cs" />
     <Compile Include="Model\Procedure\uspe_get_process_sol.cs" />
     <Compile Include="Model\Procedure\uspe_sd_estados.cs" />
+    <Compile Include="Model\Procedure\uspe_sd_rpt_fecha.cs" />
     <Compile Include="Model\Procedure\usp_solicitud.cs" />
     <Compile Include="Model\SL_SolicitudCredito.cs" />
     <Compile Include="Model\tbl_logEstado.cs" />

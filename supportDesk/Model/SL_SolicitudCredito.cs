@@ -531,7 +531,7 @@ namespace supportDesk.Model
                 using (var ctx = new ceContext())
                 {
 
-                    return ctx.Database.SqlQuery<uspe_sd_estados>("nic.USPE_SD_ESTADOS").ToList();
+                    return ctx.Database.SqlQuery<uspe_sd_estados>("USPE_SD_ESTADOS").ToList();
                 }
 
             }
@@ -602,7 +602,7 @@ namespace supportDesk.Model
 
                 using (var ctx = new ceContext())
                 {
-                    int result = ctx.Database.ExecuteSqlCommand("exec @procResult =  nic.USPE_SD_VALIDAEST @codsolicitud, @valida OUTPUT",
+                    int result = ctx.Database.ExecuteSqlCommand("exec @procResult =  USPE_SD_VALIDAEST @codsolicitud, @valida OUTPUT",
                          new object[]
                          {
                             new SqlParameter
@@ -735,7 +735,7 @@ namespace supportDesk.Model
 
                 using (var ctx = new ceContext())
                 {
-                    int result = ctx.Database.ExecuteSqlCommand("exec @procResult =  nic.USPE_SD_VALIDAEST_DEL @codSol, @respWF OUTPUT, @respTopaz OUTPUT",
+                    int result = ctx.Database.ExecuteSqlCommand("exec @procResult =  USPE_SD_VALIDAEST_DEL @codSol, @respWF OUTPUT, @respTopaz OUTPUT",
                          new object[]
                          {
                             new SqlParameter

@@ -7,6 +7,7 @@ namespace supportDesk.Model
     using System.Data.Entity.Spatial;
     using System.Linq;
     using System.Data.Entity;
+    using Procedure;
 
     [Table("tbl_logEstado")]
     public partial class tbl_logEstado
@@ -155,6 +156,23 @@ namespace supportDesk.Model
 
 
 
+        }
+
+        public List<uspe_sd_rpt_fecha>   getReport (string fechaIni, string FechaFin)
+        {
+
+            try
+            {
+                using (var ctx = new ceContext())
+                {
+                    return ctx.Database.SqlQuery<uspe_sd_rpt_fecha>("USPE_SD_RPT_FECHA @p0, @p1", fechaIni, FechaFin).ToList();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
 }
