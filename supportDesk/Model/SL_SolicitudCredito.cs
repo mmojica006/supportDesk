@@ -712,12 +712,6 @@ namespace supportDesk.Model
                          );
                     int resp = result;
                     return true;
-
-
-
-
-
-
                 }
 
             }

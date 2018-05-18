@@ -152,7 +152,11 @@ namespace supportDesk
                                 callStateNew();
                                 radioButtonBlock(false);
 
-                            }
+                        }
+                            else
+                            {
+                            MessageBox.Show("SOLICITUD NO APLICA PARA CAMBIAR ESTADO", "Consultando", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                     else
                     {
