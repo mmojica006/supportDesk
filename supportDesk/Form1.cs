@@ -132,9 +132,7 @@ namespace supportDesk
                             result = modelSolicitud.validaSolicitudDEL(Convert.ToInt64(txtSolicitud.Text));
 
                             if ((result[0] == 1) || (result[1] == 1))
-                            {
-                      
-                       
+                            {                     
                                 // Existe en topaz pero en workflow no existe
                       
                                 if (result[0] == 1)
