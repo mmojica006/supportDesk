@@ -25,19 +25,18 @@ namespace supportDesk
             {
 
                 if (ad.IsAuthenticated(txtLogin.Text, txtPassword.Text))
-                {               
-
+                { 
                     Form1 fm = new Form1(txtLogin.Text);
                     this.Hide();
                     fm.ShowDialog();
-                    this.Close(); 
-
-
-
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("FAVOR VERIFICAR SU USUARIO O CONTRASEÑA", "LOGIN", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
                 
             }
-
 
         }
 

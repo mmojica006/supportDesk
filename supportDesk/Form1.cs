@@ -389,12 +389,8 @@ namespace supportDesk
             dtpInicio.Format = DateTimePickerFormat.Custom;
             dtpFin.Format = DateTimePickerFormat.Custom;
 
-
             string fechaInicio = dtpInicio.Value.ToShortDateString();
-            string fechaFin = dtpFin.Value.ToShortDateString();
-
-
-            Convert.ToDateTime(fechaInicio).ToString("yyyyMMdd");
+            string fechaFin = dtpFin.Value.ToShortDateString();            
 
             dgvReporte.DataSource = modelLogEstado.getReport(Convert.ToDateTime(fechaInicio).ToString("yyyyMMdd"), Convert.ToDateTime(fechaFin).ToString("yyyyMMdd"));
         }

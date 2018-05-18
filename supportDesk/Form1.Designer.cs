@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.txtTipoCredito = new System.Windows.Forms.TextBox();
@@ -55,6 +56,14 @@
             this.dtpInicio = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
             this.dgvReporte = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Solicitud = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EstadoAnterior = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NuevoEstado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.user = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.motivoCambio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.objeto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -208,16 +217,18 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.DarkBlue;
             this.panel1.Controls.Add(this.rbtnObservada);
             this.panel1.Controls.Add(this.rbtnAnulada);
-            this.panel1.Location = new System.Drawing.Point(57, 35);
+            this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(860, 78);
+            this.panel1.Size = new System.Drawing.Size(942, 78);
             this.panel1.TabIndex = 11;
             // 
             // rbtnObservada
             // 
             this.rbtnObservada.AutoSize = true;
+            this.rbtnObservada.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.rbtnObservada.Location = new System.Drawing.Point(3, 26);
             this.rbtnObservada.Name = "rbtnObservada";
             this.rbtnObservada.Size = new System.Drawing.Size(111, 24);
@@ -229,6 +240,7 @@
             // rbtnAnulada
             // 
             this.rbtnAnulada.AutoSize = true;
+            this.rbtnAnulada.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.rbtnAnulada.Location = new System.Drawing.Point(144, 26);
             this.rbtnAnulada.Name = "rbtnAnulada";
             this.rbtnAnulada.Size = new System.Drawing.Size(93, 24);
@@ -330,11 +342,73 @@
             // dgvReporte
             // 
             this.dgvReporte.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvReporte.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
+            this.Solicitud,
+            this.EstadoAnterior,
+            this.NuevoEstado,
+            this.user,
+            this.motivoCambio,
+            this.objeto,
+            this.fecha});
             this.dgvReporte.Location = new System.Drawing.Point(30, 153);
             this.dgvReporte.Name = "dgvReporte";
             this.dgvReporte.RowTemplate.Height = 28;
             this.dgvReporte.Size = new System.Drawing.Size(887, 294);
             this.dgvReporte.TabIndex = 0;
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            this.id.HeaderText = "ID";
+            this.id.Name = "id";
+            this.id.Width = 50;
+            // 
+            // Solicitud
+            // 
+            this.Solicitud.DataPropertyName = "Solicitud";
+            this.Solicitud.HeaderText = "SOLICITUD";
+            this.Solicitud.Name = "Solicitud";
+            // 
+            // EstadoAnterior
+            // 
+            this.EstadoAnterior.DataPropertyName = "EstadoAnterior";
+            this.EstadoAnterior.HeaderText = "ESTADO ANTERIOR";
+            this.EstadoAnterior.Name = "EstadoAnterior";
+            this.EstadoAnterior.Width = 120;
+            // 
+            // NuevoEstado
+            // 
+            this.NuevoEstado.DataPropertyName = "NuevoEstado";
+            this.NuevoEstado.HeaderText = "NUEVO ESTADO";
+            this.NuevoEstado.Name = "NuevoEstado";
+            this.NuevoEstado.Width = 120;
+            // 
+            // user
+            // 
+            this.user.DataPropertyName = "Usuario";
+            this.user.HeaderText = "USUARIO";
+            this.user.Name = "user";
+            this.user.Width = 130;
+            // 
+            // motivoCambio
+            // 
+            this.motivoCambio.DataPropertyName = "motivoCambio";
+            this.motivoCambio.HeaderText = "COMENTARIO";
+            this.motivoCambio.Name = "motivoCambio";
+            this.motivoCambio.Width = 150;
+            // 
+            // objeto
+            // 
+            this.objeto.DataPropertyName = "objeto";
+            this.objeto.HeaderText = "TABLA";
+            this.objeto.Name = "objeto";
+            // 
+            // fecha
+            // 
+            this.fecha.DataPropertyName = "fecha";
+            this.fecha.HeaderText = "FECHA";
+            this.fecha.Name = "fecha";
             // 
             // Form1
             // 
@@ -342,8 +416,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(999, 683);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Cambios Estados TOPAZ";
+            this.Text = "CAMBIOS ESTADO TOPAZ";
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -385,6 +460,14 @@
         private System.Windows.Forms.DateTimePicker dtpInicio;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Solicitud;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EstadoAnterior;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NuevoEstado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn user;
+        private System.Windows.Forms.DataGridViewTextBoxColumn motivoCambio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn objeto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
     }
 }
 
