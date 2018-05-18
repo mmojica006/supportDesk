@@ -10,7 +10,7 @@ namespace supportDesk.Model
         public ceContext()
             : base("name=ceContext")
         {
-        }
+        } 
 
         public virtual DbSet<SL_SolicitudCredito> SL_SolicitudCredito { get; set; }
         public virtual DbSet<tbl_logEstado> tbl_logEstado { get; set; }
