@@ -540,6 +540,31 @@ namespace supportDesk.Model
                 throw;
             }
         }
+        public bool esObservadaAnulada(long idSolicitud, int estado)
+        {
+            bool result = false;
+
+            try
+            {
+                using (var ctx=new ceContext())
+                {
+                    int resp = ctx.Database.SqlQuery<int>("select 1 from SL_SolicitudCredito sl where sl.C5000= "+ idSolicitud + " and sl.C5063="+ estado)
+                                .FirstOrDefault();
+
+                    if (resp > 0)
+                        result= true;                 
+                       
+                }
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+            return result;
+
+
+        }
+
         public usp_solicitud getDataSolicitud(decimal idSolicitud)
         {
             try

@@ -50,9 +50,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(54, 130);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(103, 20);
+            this.label2.Size = new System.Drawing.Size(119, 20);
             this.label2.TabIndex = 1;
-            this.label2.Text = "PASSWORD";
+            this.label2.Text = "CONTRASEÑA";
             // 
             // txtLogin
             // 
@@ -86,6 +86,7 @@
             this.btnCancelar.TabIndex = 5;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // frmLogin
             // 

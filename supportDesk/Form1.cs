@@ -93,26 +93,31 @@ namespace supportDesk
 
                 if (txtSolicitud.Text != string.Empty)
                 {
-                    if (modelSolicitud.validaSolicitud(Convert.ToInt64(txtSolicitud.Text)) == 1)
-                    {
+                  
+                  if (!modelSolicitud.esObservadaAnulada(Convert.ToInt64(txtSolicitud.Text), 98))
+                        {
 
-                            var dataSolicitud = modelSolicitud.getDataSolicitud(Convert.ToInt64(txtSolicitud.Text));
+                            if (modelSolicitud.validaSolicitud(Convert.ToInt64(txtSolicitud.Text)) == 1)
+                            {
 
-                            txtEstadoActual.Text = Convert.ToString(dataSolicitud.estado);
-                            txtCliente.Text= Convert.ToString(dataSolicitud.nombre);
-                            txtTipoCredito.Text= Convert.ToString(dataSolicitud.tipoCredito);
-                            callStateNew();
-                            radioButtonBlock(false);
+                                    var dataSolicitud = modelSolicitud.getDataSolicitud(Convert.ToInt64(txtSolicitud.Text));
 
+                                    txtEstadoActual.Text = Convert.ToString(dataSolicitud.estado);
+                                    txtCliente.Text= Convert.ToString(dataSolicitud.nombre);
+                                    txtTipoCredito.Text= Convert.ToString(dataSolicitud.tipoCredito);
+                                    callStateNew();
+                                    radioButtonBlock(false);
 
-
-
-
+                                }
+                            else
+                            {
+                                MessageBox.Show("SOLICITUD NO APLICA PARA CAMBIAR ESTADO", "Consultando", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
-                    else
-                    {
-                        MessageBox.Show("SOLICITUD NO APLICA PARA CAMBIAR ESTADO", "Consultando", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }      
+                        else
+                        {
+                            MessageBox.Show("LA SOLICITUD YA ESTA OBSERVADA", "Consultando", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }   
 
                 }
           
@@ -120,36 +125,42 @@ namespace supportDesk
         else if(rbtnAnulada.Checked)
                 {
 
-                    int[] result;
-                    result = modelSolicitud.validaSolicitudDEL(Convert.ToInt64(txtSolicitud.Text));
-                   
-
-              
-
-                    if ((result[0] == 1) || (result[1] == 1))
+                    if (!modelSolicitud.esObservadaAnulada(Convert.ToInt64(txtSolicitud.Text), 13))
                     {
+
+                            int[] result;
+                            result = modelSolicitud.validaSolicitudDEL(Convert.ToInt64(txtSolicitud.Text));
+
+                            if ((result[0] == 1) || (result[1] == 1))
+                            {
                       
                        
-                        // Existe en topaz pero en workflow no existe
+                                // Existe en topaz pero en workflow no existe
                       
-                        if (result[0] == 1)
-                            eliminarTop = true; //Eliminar solamente en solicitudes
+                                if (result[0] == 1)
+                                    eliminarTop = true; //Eliminar solamente en solicitudes
 
-                        if (result[1] == 1)
-                            eliminarTopWf = true; //Eliminar en solicitudes y workflow
+                                if (result[1] == 1)
+                                    eliminarTopWf = true; //Eliminar en solicitudes y workflow
 
 
-                        var dataSolicitud = modelSolicitud.getDataSolicitud(Convert.ToInt64(txtSolicitud.Text));
+                                var dataSolicitud = modelSolicitud.getDataSolicitud(Convert.ToInt64(txtSolicitud.Text));
 
-                        txtEstadoActual.Text = Convert.ToString(dataSolicitud.estado);
-                        txtCliente.Text = Convert.ToString(dataSolicitud.nombre);
-                        txtTipoCredito.Text = Convert.ToString(dataSolicitud.tipoCredito);
-                        callStateNew();
-                        radioButtonBlock(false);
+                                txtEstadoActual.Text = Convert.ToString(dataSolicitud.estado);
+                                txtCliente.Text = Convert.ToString(dataSolicitud.nombre);
+                                txtTipoCredito.Text = Convert.ToString(dataSolicitud.tipoCredito);
+                                callStateNew();
+                                radioButtonBlock(false);
 
+                            }
                     }
-                    
-                 }
+                    else
+                    {
+                        MessageBox.Show("LA SOLICITUD YA ESTA ANULADA", "Consultando", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+
+
+                }
             }
             else
             {
@@ -223,44 +234,10 @@ namespace supportDesk
 
                 if (observada)
                 {
-                    if (MessageBox.Show("SEGURO QUE DESEA CAMBIAR EL ESTADO A OBSERVADO", "CAMBIO DE ESTADO", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    if (MessageBox.Show("SEGURO QUE DESEA CAMBIAR EL ESTADO A OBSERVADO?", "CAMBIO DE ESTADO", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         //do something
-             
-                    if (modelSolicitud.Guardar(idSolicitud, Convert.ToInt16(cmbEstados.SelectedValue)))
-                    {
-                        var dataAlumno = new tbl_logEstado
-                        {
-                            solicitud = idSolicitud,
-                            Objeto = "SL_SolicitudCredito",
-                            MotivoCambio = txtComment.Text,
-                            Parametro = "INSERT",
-                            EstadoAnterior = txtEstadoActual.Text,
-                            NuevoEstado = cmbEstados.GetItemText(cmbEstados.SelectedItem),
-                            fecha= Hoy,
-                            Usuario = usuario
-                        };
 
-                        modelLogEstado.Guardar(dataAlumno);
-
-                        MessageBox.Show("SOLICITUD ACTUALIZADA!", "CAMBIO DE ESTADO", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        limpiarData();
-                        radioButtonBlock(true);
-                    }
-                    else
-                    {
-                        MessageBox.Show("ERROR EN LA ACTUALIZACION!", "CAMBIO DE ESTADO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-
-                    }
-
-
-                }
-                else if (Anulada)
-                {
-
-                    if (eliminarTop)
-                    {
                         if (modelSolicitud.Guardar(idSolicitud, Convert.ToInt16(cmbEstados.SelectedValue)))
                         {
                             var dataAlumno = new tbl_logEstado
@@ -268,7 +245,7 @@ namespace supportDesk
                                 solicitud = idSolicitud,
                                 Objeto = "SL_SolicitudCredito",
                                 MotivoCambio = txtComment.Text,
-                                Parametro = "DELETE",
+                                Parametro = "INSERT",
                                 EstadoAnterior = txtEstadoActual.Text,
                                 NuevoEstado = cmbEstados.GetItemText(cmbEstados.SelectedItem),
                                 fecha = Hoy,
@@ -285,59 +262,93 @@ namespace supportDesk
                         {
                             MessageBox.Show("ERROR EN LA ACTUALIZACION!", "CAMBIO DE ESTADO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
-
-
-                    }
-                    else if (eliminarTopWf)
-                    {
-
-                        var data = modelSolicitud.getProccesWF(idSolicitud);
-
-                        decimal p0 = Convert.ToInt64(data.id_);
-                        decimal p1 = Convert.ToInt64(data.PROCINST_);
-
-
-                        bool response = modelSolicitud.updateWF(p0, 0, p1);
-
-                        if (modelSolicitud.Guardar(idSolicitud, Convert.ToInt16(cmbEstados.SelectedValue)))
-                        {
-                            var dataAlumno = new tbl_logEstado
-                            {
-                                solicitud = idSolicitud,
-                                Objeto = "SL_SolicitudCredito || JBPM_TASKINSTANCE",
-                                MotivoCambio = txtComment.Text,
-                                Parametro = "DELETE",
-                                EstadoAnterior = txtEstadoActual.Text,
-                                NuevoEstado = cmbEstados.GetItemText(cmbEstados.SelectedItem),
-                                fecha = Hoy,
-                                Usuario = usuario
-                            };
-
-                            modelLogEstado.Guardar(dataAlumno);
-
-                            MessageBox.Show("SOLICITUD ACTUALIZADA!", "CAMBIO DE ESTADO", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            limpiarData();
-                            radioButtonBlock(true);
-                        }
-                        else
-                        {
-                            MessageBox.Show("ERROR EN LA ACTUALIZACION!", "CAMBIO DE ESTADO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-
-
-
-
-
 
                     }
 
 
                 }
+                else if (Anulada)
+                {
+                    if (MessageBox.Show("SEGURO QUE DESEA EL ESTADO A ANULADO?", "CAMBIO DE ESTADO", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+
+                        if (eliminarTop)
+                        {
+                            if (modelSolicitud.Guardar(idSolicitud, Convert.ToInt16(cmbEstados.SelectedValue)))
+                            {
+                                var dataAlumno = new tbl_logEstado
+                                {
+                                    solicitud = idSolicitud,
+                                    Objeto = "SL_SolicitudCredito",
+                                    MotivoCambio = txtComment.Text,
+                                    Parametro = "DELETE",
+                                    EstadoAnterior = txtEstadoActual.Text,
+                                    NuevoEstado = cmbEstados.GetItemText(cmbEstados.SelectedItem),
+                                    fecha = Hoy,
+                                    Usuario = usuario
+                                };
+
+                                modelLogEstado.Guardar(dataAlumno);
+
+                                MessageBox.Show("SOLICITUD ACTUALIZADA!", "CAMBIO DE ESTADO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                limpiarData();
+                                radioButtonBlock(true);
+                            }
+                            else
+                            {
+                                MessageBox.Show("ERROR EN LA ACTUALIZACION!", "CAMBIO DE ESTADO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
 
 
+                        }
+                        else if (eliminarTopWf)
+                        {
+
+                            var data = modelSolicitud.getProccesWF(idSolicitud);
+
+                            decimal p0 = Convert.ToInt64(data.id_);
+                            decimal p1 = Convert.ToInt64(data.PROCINST_);
 
 
+                        
+                             if (modelSolicitud.updateWF(p0, 0, p1))
+                             {                         
+                                if (modelSolicitud.Guardar(idSolicitud, Convert.ToInt16(cmbEstados.SelectedValue)))
+                                {
+                                    var dataAlumno = new tbl_logEstado
+                                    {
+                                        solicitud = idSolicitud,
+                                        Objeto = "SL_SolicitudCredito || JBPM_TASKINSTANCE",
+                                        MotivoCambio = txtComment.Text,
+                                        Parametro = "DELETE",
+                                        EstadoAnterior = txtEstadoActual.Text,
+                                        NuevoEstado = cmbEstados.GetItemText(cmbEstados.SelectedItem),
+                                        fecha = Hoy,
+                                        Usuario = usuario
+                                    };
 
+                                    modelLogEstado.Guardar(dataAlumno);
+
+                                    MessageBox.Show("SOLICITUD ACTUALIZADA!", "CAMBIO DE ESTADO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    limpiarData();
+                                    radioButtonBlock(true);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("ERROR EN LA ACTUALIZACION!", "CAMBIO DE ESTADO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+
+                            }
+                            else
+                            {
+                                MessageBox.Show("ERROR EN LA ACTUALIZACION!\n FAVOR REPORTAR A TECNOLOGIA", "CAMBIO DE ESTADO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+
+                        }
+
+                    }
+
+                }
 
             }
 
