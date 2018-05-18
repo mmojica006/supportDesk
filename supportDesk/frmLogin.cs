@@ -30,7 +30,7 @@ namespace supportDesk
                     Form1 fm = new Form1(txtLogin.Text);
                     this.Hide();
                     fm.ShowDialog();
-                    this.Close();
+                    this.Close(); 
 
 
 
