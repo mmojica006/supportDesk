@@ -30,14 +30,8 @@ namespace supportDesk
         public Form1(string usuario)
         {
             this.usuario = usuario;
-            InitializeComponent();
-         
-            dgvSolicitudes.AutoGenerateColumns = false;
-
-            // callProcedure();
-            //callProc(2000057);
-            //callProcedure2(2000057); 
-
+            InitializeComponent();    
+        
         }
         public Form1()
         {
@@ -137,7 +131,7 @@ namespace supportDesk
                       
                        
                         // Existe en topaz pero en workflow no existe
-                        cargarSolicitud((Convert.ToInt64(txtSolicitud.Text)));
+                      
                         if (result[0] == 1)
                             eliminarTop = true; //Eliminar solamente en solicitudes
 
@@ -186,33 +180,7 @@ namespace supportDesk
             }
         }
 
-        public void cargarSolicitud(long idSolicitud)
-        {
-            this.dgvSolicitudes.DataSource = null;
-            var DataSolicitud = modelSolicitud.Obtener(idSolicitud);
-            if ((DataSolicitud != null) && (DataSolicitud.C5000 > 0)){
-
-           
-                DataTable dt = new DataTable();
-                dt.Columns.Add(DataSolicitud.C5000.ToString());
-                dt.Columns.Add(DataSolicitud.C5063.ToString());
-
-
-                //dgvSolicitudes.Columns.Add("Solicitud", "Solicitud");
-                //dgvSolicitudes.Columns.Add("Estado", "Estado");
-                //dgvSolicitudes.Columns.Add("Cliente", "Cliente");
-
-                dgvSolicitudes.Rows.Add(DataSolicitud.C5000.ToString(), 
-                    DataSolicitud.C5063.ToString(), 
-                    DataSolicitud.C5033.ToString(), 
-                    DataSolicitud.C5062.ToString());
-
-            }
-            else
-            {
-                MessageBox.Show("Solicitud no encontrada", "Consultando", MessageBoxButtons.OK,MessageBoxIcon.Warning);
-            }
-        }
+       
 
         private void BloquearControles()
         {
@@ -225,12 +193,7 @@ namespace supportDesk
        
         }
 
-        public void cleanGridView()
-        {
-            this.dgvSolicitudes.DataSource = null;
-            this.dgvSolicitudes.Rows.Clear();
-            
-        }
+  
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {

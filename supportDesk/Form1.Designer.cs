@@ -33,11 +33,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.rbtnObservada = new System.Windows.Forms.RadioButton();
             this.rbtnAnulada = new System.Windows.Forms.RadioButton();
-            this.dgvSolicitudes = new System.Windows.Forms.DataGridView();
-            this.Solicitud = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtSolicitud = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
@@ -61,7 +56,6 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSolicitudes)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -133,44 +127,6 @@
             this.rbtnAnulada.TabStop = true;
             this.rbtnAnulada.Text = "Anulada";
             this.rbtnAnulada.UseVisualStyleBackColor = true;
-            // 
-            // dgvSolicitudes
-            // 
-            this.dgvSolicitudes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSolicitudes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Solicitud,
-            this.Estado,
-            this.Cliente,
-            this.Fecha});
-            this.dgvSolicitudes.Location = new System.Drawing.Point(990, 69);
-            this.dgvSolicitudes.Name = "dgvSolicitudes";
-            this.dgvSolicitudes.RowTemplate.Height = 28;
-            this.dgvSolicitudes.Size = new System.Drawing.Size(189, 184);
-            this.dgvSolicitudes.TabIndex = 9;
-            this.dgvSolicitudes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSolicitudes_CellDoubleClick_1);
-            // 
-            // Solicitud
-            // 
-            this.Solicitud.HeaderText = "Solicitud";
-            this.Solicitud.Name = "Solicitud";
-            // 
-            // Estado
-            // 
-            this.Estado.HeaderText = "Estado";
-            this.Estado.Name = "Estado";
-            this.Estado.Width = 70;
-            // 
-            // Cliente
-            // 
-            this.Cliente.HeaderText = "Cliente";
-            this.Cliente.Name = "Cliente";
-            this.Cliente.Width = 200;
-            // 
-            // Fecha
-            // 
-            this.Fecha.HeaderText = "Fecha";
-            this.Fecha.Name = "Fecha";
-            this.Fecha.Width = 150;
             // 
             // txtSolicitud
             // 
@@ -359,9 +315,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1275, 683);
+            this.ClientSize = new System.Drawing.Size(1032, 683);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.dgvSolicitudes);
             this.Name = "Form1";
             this.Text = "Cambios Estados TOPAZ";
             this.tabControl1.ResumeLayout(false);
@@ -369,7 +324,6 @@
             this.tabPage1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSolicitudes)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
@@ -387,11 +341,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox txtSolBuscar;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridView dgvSolicitudes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Solicitud;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Estado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cliente;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RadioButton rbtnObservada;
