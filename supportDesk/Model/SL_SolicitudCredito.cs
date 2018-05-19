@@ -561,8 +561,6 @@ namespace supportDesk.Model
                 result = false;
             }
             return result;
-
-
         }
 
         public usp_solicitud getDataSolicitud(decimal idSolicitud)
