@@ -548,7 +548,7 @@ namespace supportDesk.Model
             {
                 using (var ctx=new ceContext())
                 {
-                    int resp = ctx.Database.SqlQuery<int>("select 1 from SL_SolicitudCredito sl where sl.C5000= "+ idSolicitud + " and sl.C5063="+ estado)
+                    int resp = ctx.Database.SqlQuery<int>("select 1 from SL_SolicitudCredito (nolock) sl where sl.C5000= "+ idSolicitud + " and sl.C5063="+ estado)
                                 .FirstOrDefault();
 
                     if (resp > 0)
