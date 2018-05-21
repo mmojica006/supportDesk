@@ -16,7 +16,11 @@ namespace supportDesk
         ServicioActiveDirectory ad = new ServicioActiveDirectory();
         public frmLogin()
         {
+          
+
             InitializeComponent();
+
+
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
