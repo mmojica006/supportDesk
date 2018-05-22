@@ -1,5 +1,7 @@
-﻿using System;
+﻿using supportDesk.Model;
+using System;
 using System.DirectoryServices;
+using System.Text;
 
 namespace suppportDesk
 {
@@ -9,6 +11,8 @@ namespace suppportDesk
         private const string domain = "crediexpress";
         private String _path;
         private String _filterAttribute;
+
+ 
 
         public void Autenticar(string usuario, string contrasena)
         {
@@ -159,5 +163,84 @@ namespace suppportDesk
 
             return true;
         }
+
+        public String GetGroups()
+        {
+
+            responseResult respuesta = new responseResult();
+            //DirectorySearcher search = new DirectorySearcher(_path);
+            DirectorySearcher search = new DirectorySearcher("LDAP://crediexpress.local/DC=crediexpress, DC=local");
+            search.Filter = "(cn=" + _filterAttribute + ")";
+            search.PropertiesToLoad.Add("memberOf");
+            StringBuilder groupNames = new StringBuilder();
+
+            try
+            {
+                SearchResult result = search.FindOne();
+
+                int propertyCount = result.Properties["memberOf"].Count;
+
+                String dn;
+                int equalsIndex, commaIndex;
+
+                for (int propertyCounter = 0; propertyCounter < propertyCount; propertyCounter++)
+                {
+                    dn = (String)result.Properties["memberOf"][propertyCounter];
+
+                    equalsIndex = dn.IndexOf("=", 1);
+                    commaIndex = dn.IndexOf(",", 1);
+                    if (-1 == equalsIndex)
+                    {
+                        return null;
+                    }
+
+                    groupNames.Append(dn.Substring((equalsIndex + 1), (commaIndex - equalsIndex) - 1));
+                    groupNames.Append("|");
+
+                }
+                respuesta.Success = true;
+                respuesta.mensaje = groupNames.ToString();
+
+            }
+            catch (Exception ex)
+            {
+                respuesta.ErrorMessage = ex.Message;
+                respuesta.Success = false;
+                throw new Exception("Error obteniendo grupo de nombres . " + ex.Message + " " + groupNames.ToString());
+
+            }
+            return groupNames.ToString();
+        }
+
+        public bool IsUserInGroup(string username, string groupepath)
+        {
+            string path = "LDAP://localhost:389/CN={0},OU=ADAM users,DC=prueba,DC=adam";
+
+            DirectoryEntry rootEntry = new DirectoryEntry(path);
+
+            DirectorySearcher srch = new DirectorySearcher(rootEntry);
+            srch.SearchScope = SearchScope.Subtree;
+
+            srch.Filter = "(&(objectClass=user)(sAMAccountName=*" + username + "*)(memberof=CN=GastzugangUser,OU=SubFolderB,OU=FolderB,DC=company,DC=com))";
+
+
+            SearchResultCollection res = srch.FindAll();
+
+            if (res == null || res.Count <= 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+
+
+        //Checks to see if a user is in a group and returns a bool
+
+
+
     }
 }

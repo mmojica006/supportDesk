@@ -57,18 +57,21 @@
             // 
             // txtLogin
             // 
-            this.txtLogin.Location = new System.Drawing.Point(171, 84);
+            this.txtLogin.Location = new System.Drawing.Point(181, 84);
             this.txtLogin.Name = "txtLogin";
             this.txtLogin.Size = new System.Drawing.Size(321, 26);
             this.txtLogin.TabIndex = 2;
+            this.txtLogin.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLogin_KeyPress);
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(171, 130);
+            this.txtPassword.Location = new System.Drawing.Point(181, 130);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(321, 26);
             this.txtPassword.TabIndex = 3;
+            this.txtPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPassword_KeyDown);
+            this.txtPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPassword_KeyPress);
             // 
             // btnAceptar
             // 
