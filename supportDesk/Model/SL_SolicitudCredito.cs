@@ -530,7 +530,6 @@ namespace supportDesk.Model
             {
                 using (var ctx = new ceContext())
                 {
-
                     return ctx.Database.SqlQuery<uspe_sd_estados>("USPE_SD_ESTADOS").ToList();
                 }
 
@@ -556,6 +555,8 @@ namespace supportDesk.Model
             }catch(Exception e)
             {
                 throw;
+
+
             
             }
          
