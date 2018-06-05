@@ -122,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="if_help_1645992.ico" />
+    <None Include="img\logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

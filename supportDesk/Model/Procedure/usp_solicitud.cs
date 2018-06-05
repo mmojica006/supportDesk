@@ -12,6 +12,7 @@ namespace supportDesk.Model.Procedure
         public string estado { get; set; }
         public string nombre { get; set; }
         public string tipoCredito { get; set; }
+        public string estadoWF { get; set; }
 
 
     }

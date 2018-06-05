@@ -44,8 +44,6 @@
             this.txtCliente = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.rbtnObservada = new System.Windows.Forms.RadioButton();
-            this.rbtnAnulada = new System.Windows.Forms.RadioButton();
             this.txtSolicitud = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
@@ -64,6 +62,10 @@
             this.motivoCambio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.objeto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtEstadoWF = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.lblEstadoWFResult = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -83,6 +85,9 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.lblEstadoWFResult);
+            this.tabPage1.Controls.Add(this.txtEstadoWF);
+            this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.txtTipoCredito);
             this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.label2);
@@ -155,6 +160,7 @@
             // 
             // btnSave
             // 
+            this.btnSave.Enabled = false;
             this.btnSave.Location = new System.Drawing.Point(364, 497);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(93, 38);
@@ -165,17 +171,17 @@
             // 
             // txtComment
             // 
-            this.txtComment.Location = new System.Drawing.Point(165, 298);
+            this.txtComment.Location = new System.Drawing.Point(165, 341);
             this.txtComment.MaxLength = 1000;
             this.txtComment.Multiline = true;
             this.txtComment.Name = "txtComment";
-            this.txtComment.Size = new System.Drawing.Size(752, 170);
+            this.txtComment.Size = new System.Drawing.Size(752, 115);
             this.txtComment.TabIndex = 17;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(52, 305);
+            this.label3.Location = new System.Drawing.Point(52, 348);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(91, 20);
             this.label3.TabIndex = 16;
@@ -218,36 +224,11 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.DarkBlue;
-            this.panel1.Controls.Add(this.rbtnObservada);
-            this.panel1.Controls.Add(this.rbtnAnulada);
-            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Controls.Add(this.label10);
+            this.panel1.Location = new System.Drawing.Point(0, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(942, 78);
+            this.panel1.Size = new System.Drawing.Size(952, 78);
             this.panel1.TabIndex = 11;
-            // 
-            // rbtnObservada
-            // 
-            this.rbtnObservada.AutoSize = true;
-            this.rbtnObservada.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.rbtnObservada.Location = new System.Drawing.Point(3, 26);
-            this.rbtnObservada.Name = "rbtnObservada";
-            this.rbtnObservada.Size = new System.Drawing.Size(111, 24);
-            this.rbtnObservada.TabIndex = 2;
-            this.rbtnObservada.TabStop = true;
-            this.rbtnObservada.Text = "Observada";
-            this.rbtnObservada.UseVisualStyleBackColor = true;
-            // 
-            // rbtnAnulada
-            // 
-            this.rbtnAnulada.AutoSize = true;
-            this.rbtnAnulada.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.rbtnAnulada.Location = new System.Drawing.Point(144, 26);
-            this.rbtnAnulada.Name = "rbtnAnulada";
-            this.rbtnAnulada.Size = new System.Drawing.Size(93, 24);
-            this.rbtnAnulada.TabIndex = 10;
-            this.rbtnAnulada.TabStop = true;
-            this.rbtnAnulada.Text = "Anulada";
-            this.rbtnAnulada.UseVisualStyleBackColor = true;
             // 
             // txtSolicitud
             // 
@@ -410,6 +391,43 @@
             this.fecha.HeaderText = "FECHA";
             this.fecha.Name = "fecha";
             // 
+            // txtEstadoWF
+            // 
+            this.txtEstadoWF.Location = new System.Drawing.Point(165, 291);
+            this.txtEstadoWF.Name = "txtEstadoWF";
+            this.txtEstadoWF.ReadOnly = true;
+            this.txtEstadoWF.Size = new System.Drawing.Size(339, 26);
+            this.txtEstadoWF.TabIndex = 25;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(52, 294);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(89, 20);
+            this.label9.TabIndex = 24;
+            this.label9.Text = "Estado WF";
+            // 
+            // lblEstadoWFResult
+            // 
+            this.lblEstadoWFResult.AutoSize = true;
+            this.lblEstadoWFResult.Location = new System.Drawing.Point(514, 297);
+            this.lblEstadoWFResult.Name = "lblEstadoWFResult";
+            this.lblEstadoWFResult.Size = new System.Drawing.Size(0, 20);
+            this.lblEstadoWFResult.TabIndex = 26;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.label10.Location = new System.Drawing.Point(177, 24);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(609, 25);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "FORMULARIO PARA REALIZAR CAMBIOS DE ESTADOS TOPAZ";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -423,6 +441,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CAMBIOS ESTADO TOPAZ";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -444,8 +463,6 @@
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.RadioButton rbtnObservada;
-        private System.Windows.Forms.RadioButton rbtnAnulada;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbEstados;
         private System.Windows.Forms.Button btnLimpiar;
@@ -472,6 +489,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn motivoCambio;
         private System.Windows.Forms.DataGridViewTextBoxColumn objeto;
         private System.Windows.Forms.DataGridViewTextBoxColumn fecha;
+        private System.Windows.Forms.TextBox txtEstadoWF;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblEstadoWFResult;
+        private System.Windows.Forms.Label label10;
     }
 }
 

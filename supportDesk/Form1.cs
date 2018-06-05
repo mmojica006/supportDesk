@@ -69,17 +69,44 @@ namespace supportDesk
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-
-            var dataSolicitud = modelSolicitud.getDataSolicitud(Convert.ToInt64(txtSolicitud.Text));
-            if (dataSolicitud != null) {
-                txtEstadoActual.Text = Convert.ToString(dataSolicitud.estado);
-                txtCliente.Text = Convert.ToString(dataSolicitud.nombre);
-                txtTipoCredito.Text = Convert.ToString(dataSolicitud.tipoCredito);
-                callStateNew();
-            }
-            else
+            if (txtSolicitud.Text != string.Empty)
             {
-                MessageBox.Show("DATA NO ENCONTRADA", "CAMBIO DE ESTADO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                     
+                var dataSolicitud = modelSolicitud.getDataSolicitud(Convert.ToInt64(txtSolicitud.Text));
+                if (dataSolicitud != null) {
+               
+                    txtEstadoActual.Text = Convert.ToString(dataSolicitud.estado);
+                    txtCliente.Text = Convert.ToString(dataSolicitud.nombre);
+                    txtTipoCredito.Text = Convert.ToString(dataSolicitud.tipoCredito);
+                    txtEstadoWF.Text = Convert.ToString(dataSolicitud.estadoWF);
+
+
+                    if (txtEstadoWF.Text == string.Empty)
+                    {
+                        lblEstadoWFResult.Text = "No tiene estado workflow";
+                        lblEstadoWFResult.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        lblEstadoWFResult.Text = "Existe en workflow";
+                        lblEstadoWFResult.ForeColor = Color.Green;
+                    }
+
+                    var result = modelSolicitud.nuevoEstado(txtEstadoActual.Text, txtEstadoWF.Text);
+
+                    callStateNew();
+                    txtSolicitud.Enabled = false;
+                    cmbEstados.Enabled = true;
+                    btnSave.Enabled = true;
+                }
+                else
+                {
+                    MessageBox.Show("DATA NO ENCONTRADA", "CAMBIO DE ESTADO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }else
+            {
+                MessageBox.Show("Favor completar el campo solicitud", "CAMBIO DE ESTADO", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
 
@@ -250,7 +277,7 @@ namespace supportDesk
             {
                 long idSolicitud = Convert.ToInt64(txtSolicitud.Text);
 
-                if (observada)
+                if (Convert.ToInt16(cmbEstados.SelectedValue) == 98)
                 {
                     if (MessageBox.Show("SEGURO QUE DESEA CAMBIAR EL ESTADO A OBSERVADO?", "CAMBIO DE ESTADO", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
@@ -274,7 +301,7 @@ namespace supportDesk
 
                             MessageBox.Show("SOLICITUD ACTUALIZADA!", "CAMBIO DE ESTADO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             limpiarData();
-                            radioButtonBlock(true);
+                            
                         }
                         else
                         {
@@ -285,7 +312,7 @@ namespace supportDesk
 
 
                 }
-                else if (Anulada)
+                else if (Convert.ToInt16(cmbEstados.SelectedValue) == 13)
                 {
                     if (MessageBox.Show("SEGURO QUE DESEA EL ESTADO A ANULADO?", "CAMBIO DE ESTADO", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
@@ -310,7 +337,7 @@ namespace supportDesk
 
                                 MessageBox.Show("SOLICITUD ACTUALIZADA!", "CAMBIO DE ESTADO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 limpiarData();
-                                radioButtonBlock(true);
+                                
                             }
                             else
                             {
@@ -349,7 +376,7 @@ namespace supportDesk
 
                                     MessageBox.Show("SOLICITUD ACTUALIZADA!", "CAMBIO DE ESTADO", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     limpiarData();
-                                    radioButtonBlock(true);
+                                 
                                 }
                                 else
                                 {
@@ -376,18 +403,16 @@ namespace supportDesk
         private void limpiarData()
         {
             txtSolicitud.Text = string.Empty;
-            cmbEstados.DataSource = null;
+            //cmbEstados.DataSource = null;
             txtEstadoActual.Text= string.Empty;
             txtComment.Text = string.Empty;
             txtTipoCredito.Text = string.Empty;
             txtCliente.Text = string.Empty;
+            txtEstadoWF.Text = string.Empty;
+            lblEstadoWFResult.Text = string.Empty;
+            txtSolicitud.Enabled = true;
         }
-        private void radioButtonBlock(bool bloquear)
-        {
-            rbtnAnulada.Enabled = bloquear;
-            rbtnObservada.Enabled = bloquear;
-            txtSolicitud.Enabled = bloquear;
-        }
+
 
         private void tabPage1_Click(object sender, EventArgs e)
         {
@@ -396,8 +421,9 @@ namespace supportDesk
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
-            limpiarData();
-            radioButtonBlock(true);
+            limpiarData();           
+            cmbEstados.Enabled = false;
+            btnSave.Enabled = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -409,6 +435,11 @@ namespace supportDesk
             string fechaFin = dtpFin.Value.ToShortDateString();            
 
             dgvReporte.DataSource = modelLogEstado.getReport(Convert.ToDateTime(fechaInicio).ToString("yyyyMMdd"), Convert.ToDateTime(fechaFin).ToString("yyyyMMdd"));
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

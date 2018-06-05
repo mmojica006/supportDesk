@@ -540,6 +540,26 @@ namespace supportDesk.Model
                 throw;
             }
         }
+
+        public string nuevoEstado(string estadoTopaz, string estadoWF)
+        {
+            if ((estadoTopaz != "OBSERVADA") || (estadoTopaz != "EVALUACION"))
+                estadoTopaz = "TODOS";
+          
+            try
+            {
+                using (var ctx = new ceContext())
+                {
+                    return   ctx.Database.SqlQuery<string>("select dbo.fnce_getNewState('"+estadoTopaz+"','"+ estadoWF + "')").Single().ToString();
+                }
+
+            }catch(Exception e)
+            {
+                throw;
+            
+            }
+         
+        }
         public bool esObservadaAnulada(long idSolicitud, int estado)
         {
             bool result = false;
