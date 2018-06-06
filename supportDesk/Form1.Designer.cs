@@ -118,10 +118,11 @@
             // lblEstadoWFResult
             // 
             this.lblEstadoWFResult.AutoSize = true;
-            this.lblEstadoWFResult.Location = new System.Drawing.Point(514, 297);
+            this.lblEstadoWFResult.Location = new System.Drawing.Point(514, 320);
             this.lblEstadoWFResult.Name = "lblEstadoWFResult";
-            this.lblEstadoWFResult.Size = new System.Drawing.Size(0, 20);
+            this.lblEstadoWFResult.Size = new System.Drawing.Size(100, 20);
             this.lblEstadoWFResult.TabIndex = 26;
+            this.lblEstadoWFResult.Text = "lblEstadoWF";
             // 
             // txtEstadoWF
             // 
@@ -435,8 +436,9 @@
             this.lblResult.AutoSize = true;
             this.lblResult.Location = new System.Drawing.Point(52, 103);
             this.lblResult.Name = "lblResult";
-            this.lblResult.Size = new System.Drawing.Size(0, 20);
+            this.lblResult.Size = new System.Drawing.Size(70, 20);
             this.lblResult.TabIndex = 27;
+            this.lblResult.Text = "lblResult";
             // 
             // Form1
             // 

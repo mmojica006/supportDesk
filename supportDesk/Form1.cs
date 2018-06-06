@@ -30,12 +30,17 @@ namespace supportDesk
         public Form1(string usuario)
         {
             this.usuario = usuario;
-            InitializeComponent();    
-        
+            InitializeComponent();
+            lblEstadoWFResult.Text = string.Empty;
+            lblResult.Text = string.Empty;
+
         }
         public Form1()
         {
+           
             InitializeComponent();
+         
+
         }
       
 
@@ -74,13 +79,15 @@ namespace supportDesk
                      
                 var dataSolicitud = modelSolicitud.getDataSolicitud(Convert.ToInt64(txtSolicitud.Text));
                 if (dataSolicitud != null) {
-               
+                    lblResult.Text = string.Empty;
+
                     txtEstadoActual.Text = Convert.ToString(dataSolicitud.estado);
                     txtCliente.Text = Convert.ToString(dataSolicitud.nombre);
                     txtTipoCredito.Text = Convert.ToString(dataSolicitud.tipoCredito);
                     txtEstadoWF.Text = Convert.ToString(dataSolicitud.estadoWF);
-
-
+                
+                    
+    
                     if (txtEstadoWF.Text == string.Empty)
                     {
                         lblEstadoWFResult.Text = "No tiene estado workflow";
@@ -96,19 +103,37 @@ namespace supportDesk
 
 
                     callStateNew( result);
+        
 
-                    if (cmbEstados.Items.Count < 0)
+                    if (cmbEstados.SelectedItem == null)
                     {
                         lblResult.Text = "NO EXISTE EQUIVALENCIA PARA REALIZAR CAMBIO DE ESTADO";
-                        lblEstadoWFResult.ForeColor = Color.Red;
+                        lblResult.ForeColor = Color.Red;
                         btnSave.Enabled = false;
                     }
                     else
                     {
                         txtSolicitud.Enabled = false;
-                        btnSave.Enabled = true;
-                       
+                        btnSave.Enabled = true;                       
+
                     }
+                    switch (Convert.ToInt64(dataSolicitud.idEstado))
+                    {
+                        case 88:
+                            lblResult.Text = "NO PUEDE REALIZAR GESTION SOBRE UNA SOLICITUD DESEMBOLSADA";
+                            lblResult.ForeColor = Color.Red;
+                            btnSave.Enabled = false;
+                            break;
+                        case 13:
+                            lblResult.Text = "NO PUEDE REALIZAR GESTION SOBRE UNA SOLICITUD ANULADA";
+                            lblResult.ForeColor = Color.Red;
+                            btnSave.Enabled = false;
+                            break;
+
+                    }
+
+
+
                     cmbEstados.Enabled = true;
 
 
@@ -330,10 +355,27 @@ namespace supportDesk
                 }
                 else if (Convert.ToInt16(cmbEstados.SelectedValue) == 13)
                 {
-                    if (MessageBox.Show("SEGURO QUE DESEA EL ESTADO A ANULADO?", "CAMBIO DE ESTADO", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    {
 
-                        if (eliminarTop)
+
+                    if (MessageBox.Show("SEGURO QUE DESEA ANULAR LA SOLICITUD?", "CAMBIO DE ESTADO", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        int[] result;
+                        result = modelSolicitud.validaSolicitudDEL(Convert.ToInt64(txtSolicitud.Text));
+
+                        if ((result[0] == 1) || (result[1] == 1))
+                        {
+                            // Existe en topaz pero en workflow no existe
+
+                            if (result[0] == 1)
+                                eliminarTop = true; //Eliminar solamente en solicitudes
+
+                            if (result[1] == 1)
+                                eliminarTopWf = true; //Eliminar en solicitudes y workflow
+                        }
+
+
+
+                            if (eliminarTop)
                         {
                             if (modelSolicitud.Guardar(idSolicitud, Convert.ToInt16(cmbEstados.SelectedValue)))
                             {
@@ -426,6 +468,7 @@ namespace supportDesk
             txtCliente.Text = string.Empty;
             txtEstadoWF.Text = string.Empty;
             lblEstadoWFResult.Text = string.Empty;
+            lblResult.Text = string.Empty;
             txtSolicitud.Enabled = true;
         }
 
