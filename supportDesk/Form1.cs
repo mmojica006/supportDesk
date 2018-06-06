@@ -208,7 +208,6 @@ namespace supportDesk
         private void btnSave_Click(object sender, EventArgs e)
         {
 
-
             if ((txtSolicitud.Text != string.Empty) &&
                (txtEstadoActual.Text != string.Empty) &&
                (txtComment.Text != string.Empty)
