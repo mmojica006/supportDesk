@@ -31,6 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lblEstadoWFResult = new System.Windows.Forms.Label();
+            this.txtEstadoWF = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.txtTipoCredito = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -44,6 +47,7 @@
             this.txtCliente = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
             this.txtSolicitud = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnBuscar = new System.Windows.Forms.Button();
@@ -62,10 +66,7 @@
             this.motivoCambio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.objeto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtEstadoWF = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.lblEstadoWFResult = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
+            this.lblResult = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -85,6 +86,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.lblResult);
             this.tabPage1.Controls.Add(this.lblEstadoWFResult);
             this.tabPage1.Controls.Add(this.txtEstadoWF);
             this.tabPage1.Controls.Add(this.label9);
@@ -113,9 +115,34 @@
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
+            // lblEstadoWFResult
+            // 
+            this.lblEstadoWFResult.AutoSize = true;
+            this.lblEstadoWFResult.Location = new System.Drawing.Point(514, 297);
+            this.lblEstadoWFResult.Name = "lblEstadoWFResult";
+            this.lblEstadoWFResult.Size = new System.Drawing.Size(0, 20);
+            this.lblEstadoWFResult.TabIndex = 26;
+            // 
+            // txtEstadoWF
+            // 
+            this.txtEstadoWF.Location = new System.Drawing.Point(165, 314);
+            this.txtEstadoWF.Name = "txtEstadoWF";
+            this.txtEstadoWF.ReadOnly = true;
+            this.txtEstadoWF.Size = new System.Drawing.Size(339, 26);
+            this.txtEstadoWF.TabIndex = 25;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(52, 317);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(89, 20);
+            this.label9.TabIndex = 24;
+            this.label9.Text = "Estado WF";
+            // 
             // txtTipoCredito
             // 
-            this.txtTipoCredito.Location = new System.Drawing.Point(641, 192);
+            this.txtTipoCredito.Location = new System.Drawing.Point(641, 215);
             this.txtTipoCredito.Name = "txtTipoCredito";
             this.txtTipoCredito.ReadOnly = true;
             this.txtTipoCredito.Size = new System.Drawing.Size(276, 26);
@@ -124,7 +151,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(510, 192);
+            this.label7.Location = new System.Drawing.Point(510, 215);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(113, 20);
             this.label7.TabIndex = 22;
@@ -133,7 +160,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(514, 249);
+            this.label2.Location = new System.Drawing.Point(514, 272);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(109, 20);
             this.label2.TabIndex = 21;
@@ -143,7 +170,7 @@
             // 
             this.cmbEstados.Enabled = false;
             this.cmbEstados.FormattingEnabled = true;
-            this.cmbEstados.Location = new System.Drawing.Point(641, 246);
+            this.cmbEstados.Location = new System.Drawing.Point(641, 269);
             this.cmbEstados.Name = "cmbEstados";
             this.cmbEstados.Size = new System.Drawing.Size(276, 28);
             this.cmbEstados.TabIndex = 20;
@@ -171,7 +198,7 @@
             // 
             // txtComment
             // 
-            this.txtComment.Location = new System.Drawing.Point(165, 341);
+            this.txtComment.Location = new System.Drawing.Point(165, 364);
             this.txtComment.MaxLength = 1000;
             this.txtComment.Multiline = true;
             this.txtComment.Name = "txtComment";
@@ -181,7 +208,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(52, 348);
+            this.label3.Location = new System.Drawing.Point(52, 371);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(91, 20);
             this.label3.TabIndex = 16;
@@ -189,7 +216,7 @@
             // 
             // txtEstadoActual
             // 
-            this.txtEstadoActual.Location = new System.Drawing.Point(165, 243);
+            this.txtEstadoActual.Location = new System.Drawing.Point(165, 266);
             this.txtEstadoActual.Name = "txtEstadoActual";
             this.txtEstadoActual.ReadOnly = true;
             this.txtEstadoActual.Size = new System.Drawing.Size(339, 26);
@@ -198,7 +225,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(52, 246);
+            this.label5.Location = new System.Drawing.Point(52, 269);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(107, 20);
             this.label5.TabIndex = 14;
@@ -206,7 +233,7 @@
             // 
             // txtCliente
             // 
-            this.txtCliente.Location = new System.Drawing.Point(165, 192);
+            this.txtCliente.Location = new System.Drawing.Point(165, 215);
             this.txtCliente.Name = "txtCliente";
             this.txtCliente.ReadOnly = true;
             this.txtCliente.Size = new System.Drawing.Size(339, 26);
@@ -215,7 +242,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(52, 192);
+            this.label6.Location = new System.Drawing.Point(52, 215);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(58, 20);
             this.label6.TabIndex = 12;
@@ -230,9 +257,21 @@
             this.panel1.Size = new System.Drawing.Size(952, 78);
             this.panel1.TabIndex = 11;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.label10.Location = new System.Drawing.Point(177, 24);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(609, 25);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "FORMULARIO PARA REALIZAR CAMBIOS DE ESTADOS TOPAZ";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // txtSolicitud
             // 
-            this.txtSolicitud.Location = new System.Drawing.Point(165, 132);
+            this.txtSolicitud.Location = new System.Drawing.Point(165, 155);
             this.txtSolicitud.MaxLength = 15;
             this.txtSolicitud.Name = "txtSolicitud";
             this.txtSolicitud.Size = new System.Drawing.Size(276, 26);
@@ -242,7 +281,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(52, 132);
+            this.label1.Location = new System.Drawing.Point(52, 155);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(69, 20);
             this.label1.TabIndex = 1;
@@ -250,7 +289,7 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(462, 126);
+            this.btnBuscar.Location = new System.Drawing.Point(462, 149);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(92, 38);
             this.btnBuscar.TabIndex = 0;
@@ -391,42 +430,13 @@
             this.fecha.HeaderText = "FECHA";
             this.fecha.Name = "fecha";
             // 
-            // txtEstadoWF
+            // lblResult
             // 
-            this.txtEstadoWF.Location = new System.Drawing.Point(165, 291);
-            this.txtEstadoWF.Name = "txtEstadoWF";
-            this.txtEstadoWF.ReadOnly = true;
-            this.txtEstadoWF.Size = new System.Drawing.Size(339, 26);
-            this.txtEstadoWF.TabIndex = 25;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(52, 294);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(89, 20);
-            this.label9.TabIndex = 24;
-            this.label9.Text = "Estado WF";
-            // 
-            // lblEstadoWFResult
-            // 
-            this.lblEstadoWFResult.AutoSize = true;
-            this.lblEstadoWFResult.Location = new System.Drawing.Point(514, 297);
-            this.lblEstadoWFResult.Name = "lblEstadoWFResult";
-            this.lblEstadoWFResult.Size = new System.Drawing.Size(0, 20);
-            this.lblEstadoWFResult.TabIndex = 26;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.label10.Location = new System.Drawing.Point(177, 24);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(609, 25);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "FORMULARIO PARA REALIZAR CAMBIOS DE ESTADOS TOPAZ";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblResult.AutoSize = true;
+            this.lblResult.Location = new System.Drawing.Point(52, 103);
+            this.lblResult.Name = "lblResult";
+            this.lblResult.Size = new System.Drawing.Size(0, 20);
+            this.lblResult.TabIndex = 27;
             // 
             // Form1
             // 
@@ -493,6 +503,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label lblEstadoWFResult;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblResult;
     }
 }
 

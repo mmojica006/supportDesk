@@ -94,10 +94,24 @@ namespace supportDesk
 
                     var result = modelSolicitud.nuevoEstado(txtEstadoActual.Text, txtEstadoWF.Text);
 
-                    callStateNew();
-                    txtSolicitud.Enabled = false;
+
+                    callStateNew( result);
+
+                    if (cmbEstados.Items.Count < 0)
+                    {
+                        lblResult.Text = "NO EXISTE EQUIVALENCIA PARA REALIZAR CAMBIO DE ESTADO";
+                        lblEstadoWFResult.ForeColor = Color.Red;
+                        btnSave.Enabled = false;
+                    }
+                    else
+                    {
+                        txtSolicitud.Enabled = false;
+                        btnSave.Enabled = true;
+                       
+                    }
                     cmbEstados.Enabled = true;
-                    btnSave.Enabled = true;
+
+
                 }
                 else
                 {
@@ -214,19 +228,21 @@ namespace supportDesk
 
         }
 
-        private void callStateNew()
+        private void callStateNew(string estadoNuevo)
         {
-            cmbEstados.DataSource = modelSolicitud.EstadoSolicitud();
+
+            cmbEstados.DataSource = modelSolicitud.EstadoSolicitud(estadoNuevo);
             cmbEstados.ValueMember = "CodEstado";
             cmbEstados.DisplayMember = "DescEstado";
-            if (observada)
-            {
-                cmbEstados.SelectedIndex = 0;
-            }
-            else
-            {
-                cmbEstados.SelectedIndex = 1;
-            }
+
+            //if (observada)
+            //{
+            //    cmbEstados.SelectedIndex = 0;
+            //}
+            //else
+            //{
+            //    cmbEstados.SelectedIndex = 1;
+            //}
         }
 
        
@@ -403,7 +419,7 @@ namespace supportDesk
         private void limpiarData()
         {
             txtSolicitud.Text = string.Empty;
-            //cmbEstados.DataSource = null;
+            cmbEstados.DataSource = null;
             txtEstadoActual.Text= string.Empty;
             txtComment.Text = string.Empty;
             txtTipoCredito.Text = string.Empty;

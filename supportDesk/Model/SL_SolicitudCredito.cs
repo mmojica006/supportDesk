@@ -524,13 +524,13 @@ namespace supportDesk.Model
 
         }
 
-        public List<uspe_sd_estados> EstadoSolicitud()
+        public List<uspe_sd_estados> EstadoSolicitud(string estadoNuevo)
         {
             try
             {
                 using (var ctx = new ceContext())
                 {
-                    return ctx.Database.SqlQuery<uspe_sd_estados>("USPE_SD_ESTADOS").ToList();
+                    return ctx.Database.SqlQuery<uspe_sd_estados>("USPE_SD_ESTADOS @p0", estadoNuevo).ToList();
                 }
 
             }
@@ -542,14 +542,13 @@ namespace supportDesk.Model
 
         public string nuevoEstado(string estadoTopaz, string estadoWF)
         {
-            if ((estadoTopaz != "OBSERVADA") || (estadoTopaz != "EVALUACION"))
-                estadoTopaz = "TODOS";
+            string response = "";
           
             try
             {
                 using (var ctx = new ceContext())
                 {
-                    return   ctx.Database.SqlQuery<string>("select dbo.fnce_getNewState('"+estadoTopaz+"','"+ estadoWF + "')").Single().ToString();
+                    response = ctx.Database.SqlQuery<string>("select dbo.fnce_getNewState('"+estadoTopaz+"','"+ estadoWF + "')").Single().ToString();
                 }
 
             }catch(Exception e)
@@ -559,7 +558,10 @@ namespace supportDesk.Model
 
             
             }
-         
+
+            return response;
+
+
         }
         public bool esObservadaAnulada(long idSolicitud, int estado)
         {
