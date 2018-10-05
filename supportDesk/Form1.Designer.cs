@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lblResult = new System.Windows.Forms.Label();
             this.lblEstadoWFResult = new System.Windows.Forms.Label();
             this.txtEstadoWF = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -66,7 +67,8 @@
             this.motivoCambio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.objeto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblResult = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtFechaInsert = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -86,6 +88,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.txtFechaInsert);
+            this.tabPage1.Controls.Add(this.label11);
             this.tabPage1.Controls.Add(this.lblResult);
             this.tabPage1.Controls.Add(this.lblEstadoWFResult);
             this.tabPage1.Controls.Add(this.txtEstadoWF);
@@ -114,6 +118,15 @@
             this.tabPage1.Text = "Modificar Estado";
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
+            // 
+            // lblResult
+            // 
+            this.lblResult.AutoSize = true;
+            this.lblResult.Location = new System.Drawing.Point(52, 103);
+            this.lblResult.Name = "lblResult";
+            this.lblResult.Size = new System.Drawing.Size(70, 20);
+            this.lblResult.TabIndex = 27;
+            this.lblResult.Text = "lblResult";
             // 
             // lblEstadoWFResult
             // 
@@ -431,14 +444,22 @@
             this.fecha.HeaderText = "FECHA";
             this.fecha.Name = "fecha";
             // 
-            // lblResult
+            // label11
             // 
-            this.lblResult.AutoSize = true;
-            this.lblResult.Location = new System.Drawing.Point(52, 103);
-            this.lblResult.Name = "lblResult";
-            this.lblResult.Size = new System.Drawing.Size(70, 20);
-            this.lblResult.TabIndex = 27;
-            this.lblResult.Text = "lblResult";
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(637, 161);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(140, 20);
+            this.label11.TabIndex = 28;
+            this.label11.Text = "Fecha de Registro";
+            // 
+            // txtFechaInsert
+            // 
+            this.txtFechaInsert.Location = new System.Drawing.Point(783, 161);
+            this.txtFechaInsert.Name = "txtFechaInsert";
+            this.txtFechaInsert.ReadOnly = true;
+            this.txtFechaInsert.Size = new System.Drawing.Size(134, 26);
+            this.txtFechaInsert.TabIndex = 29;
             // 
             // Form1
             // 
@@ -449,7 +470,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CAMBIOS ESTADO TOPAZ";
@@ -506,6 +526,8 @@
         private System.Windows.Forms.Label lblEstadoWFResult;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label lblResult;
+        private System.Windows.Forms.TextBox txtFechaInsert;
+        private System.Windows.Forms.Label label11;
     }
 }
 

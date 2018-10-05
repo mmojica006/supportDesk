@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -85,6 +86,7 @@ namespace supportDesk
                     txtCliente.Text = Convert.ToString(dataSolicitud.nombre);
                     txtTipoCredito.Text = Convert.ToString(dataSolicitud.tipoCredito);
                     txtEstadoWF.Text = Convert.ToString(dataSolicitud.estadoWF);
+                    txtFechaInsert.Text = dataSolicitud.Fecha_Registro;
                 
                     
     
@@ -215,7 +217,7 @@ namespace supportDesk
             {
                 long idSolicitud = Convert.ToInt64(txtSolicitud.Text);
 
-                if (Convert.ToInt16(cmbEstados.SelectedValue) == 98)
+                if ((Convert.ToInt16(cmbEstados.SelectedValue) == 98)||(Convert.ToInt16(cmbEstados.SelectedValue) == 99))
                 {
                     if (MessageBox.Show("SEGURO QUE DESEA CAMBIAR EL ESTADO A OBSERVADO?", "CAMBIO DE ESTADO", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
@@ -350,6 +352,9 @@ namespace supportDesk
 
                 }
 
+            }else
+            {
+                MessageBox.Show("HACEN FALTA CAMPOS REQUERIDOS!\n FAVOR VERIFICAR", "CAMBIO DE ESTADO", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
 
